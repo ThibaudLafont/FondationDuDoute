@@ -28,6 +28,11 @@ class Gallery extends BaseGallery
      */
     private $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="gallery")
+     */
+    private $books;
+
     public function __construct()
     {
         // Initialize array collections
@@ -60,5 +65,18 @@ class Gallery extends BaseGallery
     public function addPost(Post $post)
     {
         $this->posts->add($post);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBooks()
+    {
+        return $this->books;
+    }
+
+    public function addBook(Book $book)
+    {
+        $this->books->add($book);
     }
 }

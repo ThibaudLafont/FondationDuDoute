@@ -78,8 +78,7 @@ sonata_admin:
         groups:
             Contenu:
                 items:
-                    - admin.category
-                    - admin.post
+                    - admin.book
             Médias:
                 icon: '<i class="fa fa-image"></i>'
                 items:
