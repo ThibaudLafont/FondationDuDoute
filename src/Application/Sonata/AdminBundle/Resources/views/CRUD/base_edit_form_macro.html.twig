@@ -9,7 +9,9 @@
                 <div class="box-header">
                     <h4 class="box-title">
                         {{ form_group.label|trans({}, form_group.translation_domain ?: admin.translationDomain) }}
-                        {{ form.vars.data.providerName|trans({}, 'SonataMediaBundle') }}
+                        {% if form.vars.data.providerName is defined %}
+                            {{ form.vars.data.providerName|trans({}, 'SonataMediaBundle') }}
+                        {% endif %}
                     </h4>
                 </div>
                 <div class="box-body">

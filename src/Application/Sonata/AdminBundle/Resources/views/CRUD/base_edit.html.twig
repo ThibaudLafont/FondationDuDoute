@@ -16,8 +16,10 @@ file that was distributed with this source code.
     {% if objectId|default(admin.id(object)) is not null %}
         {{ "title_edit"|trans({'%name%': admin.toString(object)|truncate(15) }, 'SonataAdminBundle') }}
     {% else %}
-        {{ "title_create"|trans({}, 'SonataAdminBundle') }} un média
-        {{ form.vars.data.providerName|trans({}, 'SonataMediaBundle') }}
+        {{ "title_create"|trans({}, 'SonataAdminBundle') }}
+        {% if form.vars.data.providerName is defined %}
+            un média {{ form.vars.data.providerName|trans({}, 'SonataMediaBundle') }}
+        {% endif %}
     {% endif %}
 {% endblock %}
 
