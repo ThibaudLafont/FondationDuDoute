@@ -2,6 +2,7 @@
 
 namespace Application\Sonata\MediaBundle\Entity;
 
+use AppBundle\Entity\Book;
 use AppBundle\Entity\Post;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Datagrid\ListMapper;

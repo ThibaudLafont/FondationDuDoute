@@ -2,6 +2,8 @@
 namespace AppBundle\Entity;
 
 use Application\Sonata\MediaBundle\Entity\Gallery;
+use Application\Sonata\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,7 +41,7 @@ class Book
     /**
      * @var \Date
      *
-     * @ORM\Column(name="publish_at", type="datetime")
+     * @ORM\Column(name="publish_at", type="date")
      */
     private $publishAt;
 
@@ -56,6 +58,11 @@ class Book
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", inversedBy="books")
      */
     private $gallery;
+
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -106,9 +113,9 @@ class Book
     }
 
     /**
-     * @param \Date $publishAt
+     * @param Notice: Undefined index\DateTime $publishAt
      */
-    public function setPublishAt(\Date $publishAt)
+    public function setPublishAt($publishAt)
     {
         $this->publishAt = $publishAt;
     }

@@ -1,12 +1,15 @@
 <?php
 namespace AppBundle\Admin;
 
-use Application\Sonata\MediaBundle\Entity\Gallery;
+use Application\Sonata\MediaBundle\Entity\Media;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\CoreBundle\Form\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class BookAdmin extends AbstractAdmin
 {
@@ -14,16 +17,26 @@ class BookAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Livre', ['class' => 'col-md-9'])
-                ->add('title')
-                ->add('gallery', ModelType::class, [
-                    'class' => Gallery::class,
-                    'property' => 'name'
+                ->add('title', TextType::class, [
+                    'label' => 'Titre'
                 ])
+//                ->add('gallery', ModelType::class, [
+//                    'class' => Gallery::class,
+//                    'property' => 'name',
+//                    'label' => 'Gallerie'
+//                ])
             ->end()
             ->with('Détails', ['class' => 'col-md-3'])
-                ->add('publishAt')
-                ->add('author')
-                ->add('summary')
+                ->add('publishAt', DateType::class, [
+                    'format' => 'ddMMyyyy',
+                    'label' => 'Publié le'
+                ])
+                ->add('author', TextType::class, [
+                    'label' => 'Auteur'
+                ])
+                ->add('summary', TextareaType::class, [
+                    'label' => 'Résumé'
+                ])
             ->end();
     }
 
