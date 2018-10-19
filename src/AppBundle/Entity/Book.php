@@ -5,6 +5,7 @@ use Application\Sonata\MediaBundle\Entity\Gallery;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Sonata\MediaBundle\Model\GalleryHasMediaInterface;
 
 /**
  * Class Book
@@ -58,11 +59,6 @@ class Book
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", inversedBy="books")
      */
     private $gallery;
-
-    public function __construct()
-    {
-        $this->medias = new ArrayCollection();
-    }
 
     /**
      * @return int
