@@ -79,6 +79,7 @@ sonata_admin:
             Contenu:
                 items:
                     - admin.book
+                    - admin.website
             Médias:
                 icon: '<i class="fa fa-image"></i>'
                 items:

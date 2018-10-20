@@ -33,11 +33,6 @@ class Post
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
-     */
-    private $category;
-
-    /**
      * @var mixed
      *
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", inversedBy="posts")
@@ -82,22 +77,6 @@ class Post
     public function setContent($content)
     {
         $this->content = $content;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param mixed $category
-     */
-    public function setCategory(Category $category)
-    {
-        $this->category = $category;
     }
 
     /**
