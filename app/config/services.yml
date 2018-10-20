@@ -37,7 +37,7 @@ services:
         class: AppBundle\Admin\PostAdmin
         arguments: [~, AppBundle\Entity\Post, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Post }
+            - { name: sonata.admin, manager_type: orm, label: Fiches Thématique }
         public: true
 
     admin.book:

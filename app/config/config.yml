@@ -110,7 +110,7 @@ sonata_admin:
             Médias:
                 icon: '<i class="fa fa-image"></i>'
                 items:
-                    - custom.media.admin.gallery
+#                    - custom.media.admin.gallery
                     - custom.media.admin.media
     assets:
         extra_javascripts:
@@ -166,7 +166,7 @@ sonata_formatter:
             extensions:
                 - sonata.formatter.twig.control_flow
                 - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
+                - sonata.media.formatter.twig
 
 
         text:
@@ -195,7 +195,7 @@ sonata_formatter:
 
         twig:
             service: sonata.formatter.text.twigengine
-            extensions: [] # Twig formatter cannot have extensions
+            extensions: []
 
     ckeditor:
         templates:
