@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\FormatterBundle\Form\Type\FormatterType;
+use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -21,8 +23,24 @@ class PostAdmin extends AbstractAdmin
                 ->add('title', TextType::class, [
                     'label' => 'Titre'
                 ])
-                ->add('content', TextType::class, [
-                    'label' => 'Contenu'
+                ->add('content', FormatterType::class, [
+                    'format_field_options' => [
+                        'choices' => [
+                            'richhtml' => 'richhtml'
+                        ],
+                        'data' => 'richhtml',
+                    ],
+                    'source_field'         => 'rawContent',
+                    'source_field_options' => [
+                        'attr' => [
+                            'class' => 'span10',
+                            'rows' => 30
+                        ],
+                    ],
+                    'format_field'         => 'contentFormatter',
+                    'target_field'         => 'content',
+                    'ckeditor_context'     => 'default',
+                    'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
                 ])
             ->end()
             ->with('Playlist', ['class' => 'col-md-3'])

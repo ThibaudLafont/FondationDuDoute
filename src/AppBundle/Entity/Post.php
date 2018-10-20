@@ -33,6 +33,13 @@ class Post
     private $content;
 
     /**
+     * @var string
+     */
+    private $rawContent;
+
+    private $contentFormatter;
+
+    /**
      * @return int
      */
     public function getId()
@@ -70,5 +77,37 @@ class Post
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRawContent()
+    {
+        return $this->rawContent;
+    }
+
+    /**
+     * @param string $rawContent
+     */
+    public function setRawContent($rawContent)
+    {
+        $this->rawContent = $rawContent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContentFormatter()
+    {
+        return $this->contentFormatter;
+    }
+
+    /**
+     * @param mixed $contentFormatter
+     */
+    public function setContentFormatter($contentFormatter)
+    {
+        $this->contentFormatter = $contentFormatter;
     }
 }
