@@ -1,4 +1,11 @@
 # Sonata MediaAdmin items
+parameters:
+    sonata.media.admin.gallery.class: 'Application\Sonata\MediaBundle\Admin\GalleryAdmin'
+    sonata.media.admin.gallery_has_media.class: 'Application\Sonata\MediaBundle\Admin\GalleryHasMediaAdmin'
+    sonata.media.admin.book_has_media.class: 'Application\Sonata\MediaBundle\Admin\BookHasMediaAdmin'
+    sonata.media.admin.post_has_song.class: 'Application\Sonata\MediaBundle\Admin\PostHasSongAdmin'
+    sonata.media.admin.media.class: 'Application\Sonata\MediaBundle\Admin\MediaAdmin'
+
 services:
     custom.media.admin.gallery:
         class: '%sonata.media.admin.gallery.class%'
@@ -26,6 +33,16 @@ services:
             - ~
             - AppBundle\Entity\BookHasMedia
             - Application:BookHasMediaAdmin
+            - '@sonata.media.pool'
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin}
+
+    custom.media.admin.post_has_song:
+        class: '%sonata.media.admin.post_has_song.class%'
+        arguments:
+            - ~
+            - AppBundle\Entity\PostHasSong
+            - Application:PostHasSongAdmin
             - '@sonata.media.pool'
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin}

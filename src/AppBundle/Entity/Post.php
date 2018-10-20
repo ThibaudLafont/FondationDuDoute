@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Application\Sonata\MediaBundle\Entity\Gallery;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,13 +32,23 @@ class Post
      * @ORM\Column(name="content", type="text")
      */
     private $content;
+    private $rawContent;
+    private $contentFormatter;
 
     /**
-     * @var string
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PostHasSong", mappedBy="post", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $rawContent;
+    private $postHasSongs;
 
-    private $contentFormatter;
+    /**
+     * Pre Update method.
+     */
+    public function __construct()
+    {
+        $this->postHasSongs = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -109,5 +120,33 @@ class Post
     public function setContentFormatter($contentFormatter)
     {
         $this->contentFormatter = $contentFormatter;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPostHasSongs()
+    {
+        return $this->postHasSongs;
+    }
+
+    public function setPostHasSongs($postHasSongs)
+    {
+        // Avoid existant postHasSongs duplication
+        $this->postHasSongs->clear();
+
+        // Loop and assign Entities to this Book
+        foreach($postHasSongs as $postHasSong){
+            if($postHasSong instanceof PostHasSong){
+                $this->addPostHasSong($postHasSong);
+            }
+        }
+    }
+
+    public function addPostHasSong(PostHasSong $postHasSong) {
+        // Add BookHasMedia to array
+        $this->postHasSongs->add($postHasSong);
+        //Set this to bookHasMedia
+        $postHasSong->setPost($this);
     }
 }

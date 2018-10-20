@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,7 +20,7 @@ class PostAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Contenu', ['class' => 'col-md-9'])
+            ->with('Contenu', ['class' => 'col-md-8'])
                 ->add('title', TextType::class, [
                     'label' => 'Titre'
                 ])
@@ -43,7 +44,16 @@ class PostAdmin extends AbstractAdmin
                     'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
                 ])
             ->end()
-            ->with('Playlist', ['class' => 'col-md-3'])
+            ->with('Playlist', ['class' => 'col-md-4'])
+                ->add('postHasSongs', CollectionType::class, [
+                    'by_reference' => false,
+                    'label' => 'Morceaux'
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                    'admin_code' => 'custom.media.admin.post_has_song'
+                ])
             ->end()
             ->with('Gallerie')
             ->end();
