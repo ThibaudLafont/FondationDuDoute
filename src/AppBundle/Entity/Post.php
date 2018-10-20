@@ -33,13 +33,6 @@ class Post
     private $content;
 
     /**
-     * @var mixed
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", inversedBy="posts")
-     */
-    private $gallery;
-
-    /**
      * @return int
      */
     public function getId()
@@ -77,21 +70,5 @@ class Post
     public function setContent($content)
     {
         $this->content = $content;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGallery()
-    {
-        return $this->gallery;
-    }
-
-    /**
-     * @param mixed $gallery
-     */
-    public function setGallery(Gallery $gallery)
-    {
-        $this->gallery = $gallery;
     }
 }

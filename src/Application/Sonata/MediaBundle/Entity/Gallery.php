@@ -24,11 +24,6 @@ class Gallery extends BaseGallery
      */
     protected $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="gallery")
-     */
-    private $posts;
-
     public function __construct()
     {
         // Initialize array collections
@@ -48,18 +43,5 @@ class Gallery extends BaseGallery
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPosts()
-    {
-        return $this->posts;
-    }
-
-    public function addPost(Post $post)
-    {
-        $this->posts->add($post);
     }
 }

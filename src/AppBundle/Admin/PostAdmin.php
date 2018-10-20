@@ -18,20 +18,16 @@ class PostAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Contenu', ['class' => 'col-md-9'])
-                ->add('title', TextType::class)
-                ->add('content', TextType::class)
-            ->end()
-            ->with('Meta', ['class' => 'col-md-3'])
-                ->add('category', ModelType::class, [
-                    'class' => Category::class,
-                    'property' => 'name'
+                ->add('title', TextType::class, [
+                    'label' => 'Titre'
                 ])
+                ->add('content', TextType::class, [
+                    'label' => 'Contenu'
+                ])
+            ->end()
+            ->with('Playlist', ['class' => 'col-md-3'])
             ->end()
             ->with('Gallerie')
-                ->add('gallery', ModelType::class, [
-                    'class' => Gallery::class,
-                    'property' => 'name'
-                ])
             ->end();
     }
 
