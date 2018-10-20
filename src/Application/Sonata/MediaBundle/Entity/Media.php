@@ -22,11 +22,6 @@ class Media extends BaseMedia
      */
     protected $id;
 
-    public function __construct()
-    {
-        $this->books = new ArrayCollection();
-    }
-
     /**
      * Get id.
      *

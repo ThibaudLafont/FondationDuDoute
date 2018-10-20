@@ -20,11 +20,15 @@ class BookAdmin extends AbstractAdmin
                 ->add('title', TextType::class, [
                     'label' => 'Titre'
                 ])
-//                ->add('gallery', ModelType::class, [
-//                    'class' => Gallery::class,
-//                    'property' => 'name',
-//                    'label' => 'Gallerie'
-//                ])
+                ->add('bookHasMedias', CollectionType::class, [
+                    'by_reference' => false,
+                    'label' => 'Gallerie'
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                    'admin_code' => 'custom.media.admin.book_has_media'
+                ])
             ->end()
             ->with('Détails', ['class' => 'col-md-3'])
                 ->add('publishAt', DateType::class, [

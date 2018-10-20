@@ -1,11 +1,8 @@
 <?php
 namespace AppBundle\Entity;
 
-use Application\Sonata\MediaBundle\Entity\Gallery;
-use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\MediaBundle\Model\GalleryHasMediaInterface;
 
 /**
  * Class Book
@@ -54,11 +51,19 @@ class Book
     private $summary;
 
     /**
-     * @var Gallery
+     * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", inversedBy="books")
+     * @ORM\OneToMany(targetEntity="BookHasMedia", mappedBy="book", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $gallery;
+    private $bookHasMedias;
+
+    /**
+     * Pre Update method.
+     */
+    public function __construct()
+    {
+        $this->bookHasMedias = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -133,19 +138,31 @@ class Book
     }
 
     /**
-     * @return Gallery
+     * @return ArrayCollection
      */
-    public function getGallery()
+    public function getBookHasMedias()
     {
-        return $this->gallery;
+        return $this->bookHasMedias;
     }
 
-    /**
-     * @param Gallery $gallery
-     */
-    public function setGallery(Gallery $gallery)
+    public function setBookHasMedias($bookHasMedias)
     {
-        $this->gallery = $gallery;
+        // Avoid existant bookHasMedias duplication
+        $this->bookHasMedias->clear();
+
+        // Loop and assign Entities to this Book
+        foreach($bookHasMedias as $bookHasMedia){
+            if($bookHasMedia instanceof BookHasMedia){
+                $this->addBookHasMedia($bookHasMedia);
+            }
+        }
+    }
+
+    public function addBookHasMedia(BookHasMedia $bookHasMedia) {
+        // Add BookHasMedia to array
+        $this->bookHasMedias->add($bookHasMedia);
+        //Set this to bookHasMedia
+        $bookHasMedia->setBook($this);
     }
 
 }
