@@ -13,6 +13,7 @@ use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PostAdmin extends AbstractAdmin
@@ -23,6 +24,9 @@ class PostAdmin extends AbstractAdmin
             ->with('Contenu', ['class' => 'col-md-8'])
                 ->add('title', TextType::class, [
                     'label' => 'Titre'
+                ])
+                ->add('summary', TextareaType::class, [
+                    'label' => 'Résumé'
                 ])
                 ->add('content', FormatterType::class, [
                     'format_field_options' => [
@@ -44,7 +48,7 @@ class PostAdmin extends AbstractAdmin
                     'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
                 ])
             ->end()
-            ->with('Médias', ['class' => 'col-md-4'])
+            ->with('Playlist', ['class' => 'col-md-4'])
                 ->add('postHasSongs', CollectionType::class, [
                     'by_reference' => false,
                     'label' => 'Morceaux'
@@ -76,13 +80,13 @@ class PostAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('title')
-            ->add('category.name');
+            ->add('summary');
     }
 
     public function toString($object)
     {
         return $object instanceof Post
             ? $object->getTitle()
-            : 'Post'; // shown in the breadcrumb on the create view
+            : 'Fiche thématique'; // shown in the breadcrumb on the create view
     }
 }

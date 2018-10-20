@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 use Application\Sonata\MediaBundle\Entity\Gallery;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * @ORM\Entity()
@@ -29,12 +30,23 @@ class Post
     /**
      * @var string
      *
+     * @ORM\Column(name="summary", type="string")
+     */
+    private $summary;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
-    private $rawContent;
-    private $contentFormatter;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="raw_content", type="text")
+     */
+    private $rawContent;
     /**
      * @var ArrayCollection
      *
@@ -49,8 +61,13 @@ class Post
      */
     private $postHasMedias;
 
-    /**postHasSongs
-     * Pre Update method.
+    /**
+     * @var EventDispatcher
+     */
+    private $contentFormatter;
+
+    /**
+     * Post constructor.
      */
     public function __construct()
     {
@@ -184,5 +201,21 @@ class Post
         $this->postHasMedias->add($postHasMedia);
         //Set this to bookHasMedia
         $postHasMedia->setPost($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
     }
 }
