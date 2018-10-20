@@ -44,7 +44,7 @@ class PostAdmin extends AbstractAdmin
                     'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
                 ])
             ->end()
-            ->with('Playlist', ['class' => 'col-md-4'])
+            ->with('Médias', ['class' => 'col-md-4'])
                 ->add('postHasSongs', CollectionType::class, [
                     'by_reference' => false,
                     'label' => 'Morceaux'
@@ -55,7 +55,16 @@ class PostAdmin extends AbstractAdmin
                     'admin_code' => 'custom.media.admin.post_has_song'
                 ])
             ->end()
-            ->with('Gallerie')
+            ->with('Gallerie', ['class' => 'col-md-8'])
+                ->add('postHasMedias', CollectionType::class, [
+                    'by_reference' => false,
+                    'label' => 'Gallerie'
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                    'admin_code' => 'custom.media.admin.post_has_media'
+                ])
             ->end();
     }
 

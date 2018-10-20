@@ -4,6 +4,7 @@ parameters:
     sonata.media.admin.gallery_has_media.class: 'Application\Sonata\MediaBundle\Admin\GalleryHasMediaAdmin'
     sonata.media.admin.book_has_media.class: 'Application\Sonata\MediaBundle\Admin\BookHasMediaAdmin'
     sonata.media.admin.post_has_song.class: 'Application\Sonata\MediaBundle\Admin\PostHasSongAdmin'
+    sonata.media.admin.post_has_media.class: 'Application\Sonata\MediaBundle\Admin\PostHasMediaAdmin'
     sonata.media.admin.media.class: 'Application\Sonata\MediaBundle\Admin\MediaAdmin'
 
 services:
@@ -43,6 +44,16 @@ services:
             - ~
             - AppBundle\Entity\PostHasSong
             - Application:PostHasSongAdmin
+            - '@sonata.media.pool'
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin}
+
+    custom.media.admin.post_has_media:
+        class: '%sonata.media.admin.post_has_media.class%'
+        arguments:
+            - ~
+            - AppBundle\Entity\PostHasMedia
+            - Application:PostHasMediaAdmin
             - '@sonata.media.pool'
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin}

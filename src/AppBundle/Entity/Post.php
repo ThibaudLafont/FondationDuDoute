@@ -43,11 +43,19 @@ class Post
     private $postHasSongs;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="PostHasMedia", mappedBy="post", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $postHasMedias;
+
+    /**postHasSongs
      * Pre Update method.
      */
     public function __construct()
     {
         $this->postHasSongs = new ArrayCollection();
+        $this->postHasMedias = new ArrayCollection();
     }
 
     /**
@@ -148,5 +156,33 @@ class Post
         $this->postHasSongs->add($postHasSong);
         //Set this to bookHasMedia
         $postHasSong->setPost($this);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPostHasMedias()
+    {
+        return $this->postHasMedias;
+    }
+
+    public function setPostHasMedias($postHasMedias)
+    {
+        // Avoid existant postHasMedias duplication
+        $this->postHasMedias->clear();
+
+        // Loop and assign Entities to this Book
+        foreach($postHasMedias as $postHasMedia){
+            if($postHasMedia instanceof PostHasMedia){
+                $this->addPostHasMedia($postHasMedia);
+            }
+        }
+    }
+
+    public function addPostHasMedia(PostHasMedia $postHasMedia) {
+        // Add BookHasMedia to array
+        $this->postHasMedias->add($postHasMedia);
+        //Set this to bookHasMedia
+        $postHasMedia->setPost($this);
     }
 }
