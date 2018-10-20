@@ -1,0 +1,41 @@
+# Sonata MediaAdmin items
+services:
+    custom.media.admin.gallery:
+        class: '%sonata.media.admin.gallery.class%'
+        arguments:
+            - ~
+            - Application\Sonata\MediaBundle\Entity\Gallery
+            - Application:GalleryAdmin
+            - '@sonata.media.pool'
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Galleries}
+
+    custom.media.admin.gallery_has_media:
+        class: '%sonata.media.admin.gallery_has_media.class%'
+        arguments:
+            - ~
+            - Application\Sonata\MediaBundle\Entity\GalleryHasMedia
+            - Application:GalleryHasMediaAdmin
+            - '@sonata.media.pool'
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin}
+
+    custom.media.admin.book_has_media:
+        class: '%sonata.media.admin.book_has_media.class%'
+        arguments:
+            - ~
+            - AppBundle\Entity\BookHasMedia
+            - Application:BookHasMediaAdmin
+            - '@sonata.media.pool'
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin}
+
+    custom.media.admin.media:
+        class: '%sonata.media.admin.media.class%'
+        arguments:
+            - ~
+            - Application\Sonata\MediaBundle\Entity\Media
+            - Application:MediaAdmin
+            - '@sonata.media.pool'
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Médias}

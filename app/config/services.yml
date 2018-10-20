@@ -1,5 +1,10 @@
-# Learn more about services, parameters and containers at
-# https://symfony.com/doc/current/service_container.html
+# Imports
+imports:
+    # Custom services files
+    - { resource: services/sonata_entities.yml }
+    - { resource: services/sonata_media_items.yml }
+    - { resource: services/sonata_media_providers.yml }
+
 parameters:
     sonata.media.admin.gallery.class: 'Application\Sonata\MediaBundle\Admin\GalleryAdmin'
     sonata.media.admin.gallery_has_media.class: 'Application\Sonata\MediaBundle\Admin\GalleryHasMediaAdmin'
@@ -7,187 +12,16 @@ parameters:
     sonata.media.admin.media.class: 'Application\Sonata\MediaBundle\Admin\MediaAdmin'
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        # automatically injects dependencies in your services
         autowire: true
-        # automatically registers your services as commands, event subscribers, etc.
         autoconfigure: true
-        # this means you cannot fetch services directly from the container via $container->get()
-        # if you need to do this, you can override this setting on individual services
         public: false
 
-    # makes classes in src/AppBundle available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
     AppBundle\:
         resource: '../../src/AppBundle/*'
-        # you can exclude directories or files
-        # but if a service is unused, it's removed anyway
         exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
 
-    # controllers are imported separately to make sure they're public
-    # and have a tag that allows actions to type-hint services
     AppBundle\Controller\:
         resource: '../../src/AppBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
-
-    # Sonata Entities
-    admin.post:
-        class: AppBundle\Admin\PostAdmin
-        arguments: [~, AppBundle\Entity\Post, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Fiches Thématique }
-        public: true
-
-    admin.book:
-        class: AppBundle\Admin\BookAdmin
-        arguments: [~, AppBundle\Entity\Book, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Livres }
-        public: true
-
-    admin.website:
-        class: AppBundle\Admin\WebsiteAdmin
-        arguments: [~, AppBundle\Entity\Website, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Sites web }
-        public: true
-
-    # Sonata MediaAdmin items
-    custom.media.admin.gallery:
-        class: '%sonata.media.admin.gallery.class%'
-        arguments:
-            - ~
-            - Application\Sonata\MediaBundle\Entity\Gallery
-            - Application:GalleryAdmin
-            - '@sonata.media.pool'
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: Galleries}
-
-    custom.media.admin.gallery_has_media:
-        class: '%sonata.media.admin.gallery_has_media.class%'
-        arguments:
-            - ~
-            - Application\Sonata\MediaBundle\Entity\GalleryHasMedia
-            - Application:GalleryHasMediaAdmin
-            - '@sonata.media.pool'
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin}
-
-    custom.media.admin.book_has_media:
-        class: '%sonata.media.admin.book_has_media.class%'
-        arguments:
-            - ~
-            - AppBundle\Entity\BookHasMedia
-            - Application:BookHasMediaAdmin
-            - '@sonata.media.pool'
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin}
-
-    custom.media.admin.media:
-        class: '%sonata.media.admin.media.class%'
-        arguments:
-            - ~
-            - Application\Sonata\MediaBundle\Entity\Media
-            - Application:MediaAdmin
-            - '@sonata.media.pool'
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: Médias}
-
-    # Sonata Media providers
-    sonata.media.provider.custom.image:
-        class: Application\Sonata\MediaBundle\Provider\CustomImageProvider
-        arguments:
-            $name: 'sonata.media.provider.custom.image'
-            $filesystem: '@sonata.media.filesystem.local'
-            $cdn: '@sonata.media.cdn.server'
-            $pathGenerator: '@sonata.media.generator.default'
-            $thumbnail: '@sonata.media.thumbnail.format'
-            $allowedExtensions: ['jpg']
-            $allowedMimeTypes: ['image/jpeg']
-            $adapter: '@sonata.media.adapter.image.gd'
-        tags:
-            - { name: sonata.media.provider }
-        calls:
-            - method: setTemplates
-              arguments: [{helper_thumbnail:'sonata/providers/thumbnail.html.twig', helper_view:'sonata/providers/view_image.html.twig'}]
-            - method: setResizer
-              arguments:
-                  - '@sonata.media.resizer.simple'
-
-    sonata.media.provider.audio:
-        class: Application\Sonata\MediaBundle\Provider\AudioProvider
-        arguments:
-            $name: 'sonata.media.provider.audio'
-            $filesystem: '@sonata.media.filesystem.local'
-            $cdn: '@sonata.media.cdn.server'
-            $pathGenerator: '@sonata.media.generator.default'
-            $thumbnail: '@sonata.media.thumbnail.format'
-            $allowedExtensions: ['mp3', 'wav']
-            $allowedMimeTypes: ['audio/mpeg', 'audio/x-wav']
-        tags:
-            - { name: sonata.media.provider }
-        calls:
-            - method: setTemplates
-              arguments: [{helper_thumbnail:'sonata/providers/thumbnail.html.twig', helper_view:'sonata/providers/view_file.html.twig'}]
-            - method: setResizer
-              arguments:
-                  - '@sonata.media.resizer.simple'
-
-    sonata.media.provider.custom.youtube:
-        class: Application\Sonata\MediaBundle\Provider\CustomYoutubeProvider
-        arguments:
-            $name: 'sonata.media.provider.custom.youtube'
-            $filesystem: '@sonata.media.filesystem.local'
-            $cdn: '@sonata.media.cdn.server'
-            $pathGenerator: '@sonata.media.generator.default'
-            $thumbnail: '@sonata.media.thumbnail.format'
-            $browser: '@sonata.media.buzz.browser'
-            $metadata: '@sonata.media.metadata.proxy'
-        tags:
-            - { name: sonata.media.provider }
-        calls:
-            - method: setTemplates
-              arguments: [{helper_thumbnail:'sonata/Provider/thumbnail.html.twig', helper_view:'sonata/providers/view_youtube.html.twig'}]
-            - method: setResizer
-              arguments:
-                  - '@sonata.media.resizer.simple'
-
-    sonata.media.provider.custom.dailymotion:
-        class: Application\Sonata\MediaBundle\Provider\CustomDailymotionProvider
-        arguments:
-            $name: 'sonata.media.provider.custom.dailymotion'
-            $filesystem: '@sonata.media.filesystem.local'
-            $cdn: '@sonata.media.cdn.server'
-            $pathGenerator: '@sonata.media.generator.default'
-            $thumbnail: '@sonata.media.thumbnail.format'
-            $browser: '@sonata.media.buzz.browser'
-            $metadata: '@sonata.media.metadata.proxy'
-        tags:
-            - { name: sonata.media.provider }
-        calls:
-            - method: setTemplates
-              arguments: [{helper_thumbnail:'sonata/Provider/thumbnail.html.twig', helper_view:'sonata/providers/view_dailymotion.html.twig'}]
-            - method: setResizer
-              arguments:
-                  - '@sonata.media.resizer.simple'
-
-    sonata.media.provider.custom.vimeo:
-        class: Application\Sonata\MediaBundle\Provider\CustomVimeoProvider
-        arguments:
-            $name: 'sonata.media.provider.custom.vimeo'
-            $filesystem: '@sonata.media.filesystem.local'
-            $cdn: '@sonata.media.cdn.server'
-            $pathGenerator: '@sonata.media.generator.default'
-            $thumbnail: '@sonata.media.thumbnail.format'
-            $browser: '@sonata.media.buzz.browser'
-            $metadata: '@sonata.media.metadata.proxy'
-        tags:
-            - { name: sonata.media.provider }
-        calls:
-            - method: setTemplates
-              arguments: [{helper_thumbnail:'sonata/Provider/thumbnail.html.twig', helper_view:'sonata/providers/view_vimeo.html.twig'}]
-            - method: setResizer
-              arguments:
-                  - '@sonata.media.resizer.simple'

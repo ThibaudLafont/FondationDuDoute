@@ -1,0 +1,22 @@
+# Sonata Entities
+services:
+    admin.post:
+        class: AppBundle\Admin\PostAdmin
+        arguments: [~, AppBundle\Entity\Post, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Fiches Thématique }
+        public: true
+
+    admin.book:
+        class: AppBundle\Admin\BookAdmin
+        arguments: [~, AppBundle\Entity\Book, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Livres }
+        public: true
+
+    admin.website:
+        class: AppBundle\Admin\WebsiteAdmin
+        arguments: [~, AppBundle\Entity\Website, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Sites web }
+        public: true

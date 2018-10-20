@@ -1,0 +1,8 @@
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    date:
+        format: 'm/d/Y à H:i:s'
+    form_themes:
+        - '@SonataFormatter/Form/formatter.html.twig'
