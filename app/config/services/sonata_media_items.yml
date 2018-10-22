@@ -6,6 +6,7 @@ parameters:
     sonata.media.admin.post_has_song.class: 'Application\Sonata\MediaBundle\Admin\PostHasSongAdmin'
     sonata.media.admin.post_has_media.class: 'Application\Sonata\MediaBundle\Admin\PostHasMediaAdmin'
     sonata.media.admin.media.class: 'Application\Sonata\MediaBundle\Admin\MediaAdmin'
+    sonata.media.admin.song.class: 'Application\Sonata\MediaBundle\Admin\SongAdmin'
 
 services:
     custom.media.admin.gallery:

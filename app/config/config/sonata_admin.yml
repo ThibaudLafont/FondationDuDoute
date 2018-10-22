@@ -7,10 +7,9 @@ sonata_admin:
                     - admin.post
                     - admin.website
                     - admin.book
-            Médias:
+            Médiathèque:
                 icon: '<i class="fa fa-image"></i>'
                 items:
-#                    - custom.media.admin.gallery
                     - custom.media.admin.media
     assets:
         extra_javascripts:

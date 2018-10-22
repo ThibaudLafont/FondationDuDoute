@@ -53,7 +53,7 @@ services:
             - { name: sonata.media.provider }
         calls:
             - method: setTemplates
-              arguments: [{helper_thumbnail:'sonata/Provider/thumbnail.html.twig', helper_view:'sonata/providers/view_youtube.html.twig'}]
+              arguments: [{helper_thumbnail:'sonata/providers/thumbnail.html.twig', helper_view:'sonata/providers/view_youtube.html.twig'}]
             - method: setResizer
               arguments:
                   - '@sonata.media.resizer.simple'
@@ -72,7 +72,7 @@ services:
             - { name: sonata.media.provider }
         calls:
             - method: setTemplates
-              arguments: [{helper_thumbnail:'sonata/Provider/thumbnail.html.twig', helper_view:'sonata/providers/view_dailymotion.html.twig'}]
+              arguments: [{helper_thumbnail:'sonata/providers/thumbnail.html.twig', helper_view:'sonata/providers/view_dailymotion.html.twig'}]
             - method: setResizer
               arguments:
                   - '@sonata.media.resizer.simple'
@@ -91,7 +91,7 @@ services:
             - { name: sonata.media.provider }
         calls:
             - method: setTemplates
-              arguments: [{helper_thumbnail:'sonata/Provider/thumbnail.html.twig', helper_view:'sonata/providers/view_vimeo.html.twig'}]
+              arguments: [{helper_thumbnail:'sonata/providers/thumbnail.html.twig', helper_view:'sonata/providers/view_vimeo.html.twig'}]
             - method: setResizer
               arguments:
                   - '@sonata.media.resizer.simple'
