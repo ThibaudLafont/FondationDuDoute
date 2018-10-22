@@ -23,6 +23,7 @@ class PostHasSongAdmin extends AbstractAdmin
 
         // Limit the type of medias during browsing
         $link_parameters['mediaType'] = 'audio';
+//        $link_parameters['context'] = 'audio';
 
         $formMapper
             ->add('media', ModelListType::class, ['required' => false], [
