@@ -20,13 +20,7 @@ class PostHasMediaAdmin extends AbstractAdmin
             $link_parameters = $this->getParentFieldDescription()->getOption('link_parameters', []);
         }
 
-        if ($this->hasRequest()) {
-            $context = $this->getRequest()->get('context', null);
-
-            if (null !== $context) {
-                $link_parameters['context'] = $context;
-            }
-        }
+        $link_parameters['context'] = 'visual';
 
         $formMapper
             ->add('media', ModelListType::class, ['required' => false], [

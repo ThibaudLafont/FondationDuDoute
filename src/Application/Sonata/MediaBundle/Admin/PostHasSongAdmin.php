@@ -17,21 +17,10 @@ class PostHasSongAdmin extends AbstractAdmin
     {
         $link_parameters = [];
 
-//        if ($this->hasParentFieldDescription()) {
-//            var_dump('test'); die;
-//            $link_parameters = $this->getParentFieldDescription()->getOption('link_parameters', []);
-//        }
-
-//        if ($this->hasRequest()) {
-//            $context = $this->getRequest()->get('context', null);
-//
-////            if (null !== $context) {
-////                $link_parameters['context'] = $context;
-////            }
-//        }
-
-        // Limit available provider
-        $link_parameters['provider'] = 'sonata.media.provider.audio';
+        if ($this->hasParentFieldDescription()) {
+            $link_parameters = $this->getParentFieldDescription()->getOption('link_parameters', []);
+        }
+        
         $link_parameters['context'] = 'audio';
 
         $formMapper
