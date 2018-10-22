@@ -20,8 +20,9 @@ class PostHasSongAdmin extends AbstractAdmin
         if ($this->hasParentFieldDescription()) {
             $link_parameters = $this->getParentFieldDescription()->getOption('link_parameters', []);
         }
-        
-        $link_parameters['context'] = 'audio';
+
+        // Limit the type of medias during browsing
+        $link_parameters['mediaType'] = 'audio';
 
         $formMapper
             ->add('media', ModelListType::class, ['required' => false], [
