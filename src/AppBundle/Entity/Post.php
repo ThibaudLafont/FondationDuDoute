@@ -5,6 +5,7 @@ use Application\Sonata\MediaBundle\Entity\Gallery;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -24,6 +25,8 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title", type="string")
+     * @Assert\NotNull(message="Veuillez renseigner le titre")
+     * @Assert\NotBlank(message="Veuillez renseigner le titre")
      */
     private $title;
 
@@ -38,6 +41,8 @@ class Post
      * @var string
      *
      * @ORM\Column(name="summary", type="string")
+     * @Assert\NotNull(message="Veuillez renseigner un résumé")
+     * @Assert\NotBlank(message="Veuillez renseigner un résumé")
      */
     private $summary;
 
@@ -45,6 +50,8 @@ class Post
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotNull(message="Veuillez renseigner un contenu")
+     * @Assert\NotBlank(message="Veuillez renseigner un contenu")
      */
     private $content;
 
@@ -240,5 +247,14 @@ class Post
     public function setSummary($summary)
     {
         $this->summary = $summary;
+    }
+
+    /**
+     * @return bool
+     * @Assert\IsTrue(message="Veuillez renseigner une image de couverture")
+     */
+    public function hasACoverImage()
+    {
+        return $this->getCoverImage()->getMedia() !== null;
     }
 }
