@@ -1,5 +1,6 @@
 # Sonata Admin Bundle
 sonata_admin:
+    title: FDD - Administration
     dashboard:
         groups:
             Contenu:
