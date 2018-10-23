@@ -6,6 +6,7 @@ parameters:
     sonata.media.admin.post_has_song.class: 'Application\Sonata\MediaBundle\Admin\PostHasSongAdmin'
     sonata.media.admin.post_has_media.class: 'Application\Sonata\MediaBundle\Admin\PostHasMediaAdmin'
     sonata.media.admin.media.class: 'Application\Sonata\MediaBundle\Admin\MediaAdmin'
+    sonata.media.admin.cover_image.class: 'Application\Sonata\MediaBundle\Admin\CoverImageAdmin'
     sonata.media.admin.song.class: 'Application\Sonata\MediaBundle\Admin\SongAdmin'
 
 services:
@@ -55,6 +56,16 @@ services:
             - ~
             - AppBundle\Entity\PostHasMedia
             - Application:PostHasMediaAdmin
+            - '@sonata.media.pool'
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin}
+
+    custom.media.admin.cover_image:
+        class: '%sonata.media.admin.cover_image.class%'
+        arguments:
+            - ~
+            - AppBundle\Entity\CoverImage
+            - Application:CoverImageAdmin
             - '@sonata.media.pool'
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin}

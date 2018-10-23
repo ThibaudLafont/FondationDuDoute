@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
@@ -22,6 +23,9 @@ class PostAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Contenu', ['class' => 'col-md-8'])
+                ->add('coverImage', AdminType::class, [
+                    'label' => 'Image de couverture'
+                ])
                 ->add('title', TextType::class, [
                     'label' => 'Titre'
                 ])

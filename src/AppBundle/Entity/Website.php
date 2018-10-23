@@ -25,7 +25,7 @@ class Website
     /**
      * @var Media
      *
-     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CoverImage", cascade={"persist"})
      */
     private $coverImage;
 

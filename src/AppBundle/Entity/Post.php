@@ -28,6 +28,13 @@ class Post
     private $title;
 
     /**
+     * @var Media
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CoverImage", cascade={"persist"})
+     */
+    private $coverImage;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="summary", type="string")
@@ -97,6 +104,22 @@ class Post
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getCoverImage()
+    {
+        return $this->coverImage;
+    }
+
+    /**
+     * @param Media $coverImage
+     */
+    public function setCoverImage($coverImage)
+    {
+        $this->coverImage = $coverImage;
     }
 
     /**

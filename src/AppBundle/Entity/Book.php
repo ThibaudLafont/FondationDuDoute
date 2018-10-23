@@ -30,6 +30,13 @@ class Book
     private $title;
 
     /**
+     * @var Media
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CoverImage", cascade={"persist"})
+     */
+    private $coverImage;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="author", type="string")
@@ -87,6 +94,22 @@ class Book
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getCoverImage()
+    {
+        return $this->coverImage;
+    }
+
+    /**
+     * @param Media $coverImage
+     */
+    public function setCoverImage($coverImage)
+    {
+        $this->coverImage = $coverImage;
     }
 
     /**

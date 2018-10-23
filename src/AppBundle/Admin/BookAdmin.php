@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\CoreBundle\Form\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -17,6 +18,9 @@ class BookAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Livre', ['class' => 'col-md-9'])
+                ->add('coverImage', AdminType::class, [
+                    'label' => 'Image de couverture'
+                ])
                 ->add('title', TextType::class, [
                     'label' => 'Titre'
                 ])
