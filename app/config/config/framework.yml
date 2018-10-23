@@ -17,7 +17,10 @@ framework:
     assets: ~
     php_errors:
         log: true
-    translator: { fallbacks: ["fr"] }
+    translator:
+        fallbacks: ["fr"]
+        paths:
+            - '%kernel.project_dir%/app/Resources/translations'
 
 sensio_framework_extra:
    router:

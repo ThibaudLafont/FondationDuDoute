@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="SonataMediaBundle.en.xliff">
+        <body>
+            <trans-unit id="Contenu">
+                <source>Contenu</source>
+                <target>Contenu</target>
+            </trans-unit>
+            <trans-unit id="Titre">
+                <source>Titre</source>
+                <target>Titre</target>
+            </trans-unit>
+            <trans-unit id="Image de couverture">
+                <source>Image de couverture</source>
+                <target>Image de couverture</target>
+            </trans-unit>
+            <trans-unit id="-">
+                <source>-</source>
+                <target>-</target>
+            </trans-unit>
+            <trans-unit id="Résumé">
+                <source>Résumé</source>
+                <target>Résumé</target>
+            </trans-unit>
+            <trans-unit id="Content">
+                <source>Content</source>
+                <target>Contenu</target>
+            </trans-unit>
+            <trans-unit id="Playlist">
+                <source>Playlist</source>
+                <target>Playlist</target>
+            </trans-unit>
+            <trans-unit id="Morceaux">
+                <source>Morceaux</source>
+                <target>Morceaux</target>
+            </trans-unit>
+            <trans-unit id="Gallerie">
+                <source>Gallerie</source>
+                <target>Gallerie</target>
+            </trans-unit>
+            <trans-unit id="Post List">
+                <source>Post List</source>
+                <target>Liste des fiches thématiques</target>
+            </trans-unit>
+            <trans-unit id="Post Create">
+                <source>Post Create</source>
+                <target>Création Fiche Thématique</target>
+            </trans-unit>
+            <trans-unit id="Fiches Thématique">
+                <source>Fiches Thématique</source>
+                <target>Fiches Thématique</target>
+            </trans-unit>
+            <trans-unit id="Sites web">
+                <source>Sites web</source>
+                <target>Sites web</target>
+            </trans-unit>
+            <trans-unit id="Livres">
+                <source>Livres</source>
+                <target>Livres</target>
+            </trans-unit>
+            <trans-unit id="Médias">
+                <source>Médias</source>
+                <target>Médias</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
