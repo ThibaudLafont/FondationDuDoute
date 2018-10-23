@@ -210,7 +210,16 @@ class Book
      */
     public function hasAtLeastOneBookHasMedia()
     {
-        return $this->getBookHasMedias()->count() >= 1;
+        // If has more than one media
+        if($this->getBookHasMedias()->count() > 1) {
+            return true;
+        // If one item, check if media was inquired
+        } elseif($this->getBookHasMedias()->count() === 1) {
+            return $this->getBookHasMedias()->get(0)->getMedia() !== null;
+        // Else no media, return false
+        } else {
+            return false;
+        }
     }
 
 }
