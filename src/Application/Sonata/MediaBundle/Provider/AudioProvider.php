@@ -1,9 +1,11 @@
 <?php
 namespace Application\Sonata\MediaBundle\Provider;
 
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Provider\FileProvider;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class AudioProvider extends FileProvider
 {
@@ -14,6 +16,24 @@ class AudioProvider extends FileProvider
     public function getProviderMetadata()
     {
         return new Metadata($this->getName(), $this->getName().'.description', false, 'SonataMediaBundle', ['class' => 'glyphicon glyphicon-music']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generatePublicUrl(MediaInterface $media, $format)
+    {
+        return '/resources/audio-reference-image.jpg';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildEditForm(FormMapper $formMapper)
+    {
+        $formMapper->add('name');
+        $formMapper->add('description');
+        $formMapper->add('binaryContent', FileType::class, ['required' => false]);
     }
 
     /**
