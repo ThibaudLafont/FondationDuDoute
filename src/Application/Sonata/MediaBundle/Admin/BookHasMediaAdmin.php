@@ -22,6 +22,7 @@ class BookHasMediaAdmin extends \Sonata\MediaBundle\Admin\GalleryHasMediaAdmin
 
         // Limit the type of medias during browsing
         $link_parameters['mediaType'] = 'image';
+        $link_parameters['context'] = 'image';
 
         $formMapper
             ->add('media', ModelListType::class, ['required' => false], [

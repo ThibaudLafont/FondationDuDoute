@@ -20,6 +20,7 @@ class PostHasMediaAdmin extends AbstractAdmin
             $link_parameters = $this->getParentFieldDescription()->getOption('link_parameters', []);
         }
 
+        $link_parameters['mediaType'] = 'visual';
         $link_parameters['context'] = 'visual';
 
         $formMapper
