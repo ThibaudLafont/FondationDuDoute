@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Book
@@ -26,6 +27,8 @@ class Book
      * @var string
      *
      * @ORM\Column(name="title", type="string")
+     * @Assert\NotNull(message="Veuillez renseigner le titre")
+     * @Assert\NotBlank(message="Veuillez renseigner le titre")
      */
     private $title;
 
@@ -40,6 +43,8 @@ class Book
      * @var string
      *
      * @ORM\Column(name="author", type="string")
+     * @Assert\NotNull(message="Veuillez renseigner l'auteur")
+     * @Assert\NotBlank(message="Veuillez renseigner l'auteur")
      */
     private $author;
 
@@ -54,6 +59,8 @@ class Book
      * @var string
      *
      * @ORM\Column(name="summary", type="text")
+     * @Assert\NotNull(message="Veuillez renseigner un résumé")
+     * @Assert\NotBlank(message="Veuillez renseigner un résumé")
      */
     private $summary;
 
@@ -186,6 +193,24 @@ class Book
         $this->bookHasMedias->add($bookHasMedia);
         //Set this to bookHasMedia
         $bookHasMedia->setBook($this);
+    }
+
+    /**
+     * @return bool
+     * @Assert\IsTrue(message="Veuillez renseigner une image de couverture")
+     */
+    public function hasACoverImage()
+    {
+        return $this->getCoverImage()->getMedia() !== null;
+    }
+
+    /**
+     * @return bool
+     * @Assert\IsTrue(message="Veuillez ajouter au moins une page")
+     */
+    public function hasAtLeastOneBookHasMedia()
+    {
+        return $this->getBookHasMedias()->count() >= 1;
     }
 
 }

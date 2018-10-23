@@ -62,6 +62,30 @@
                 <source>Médias</source>
                 <target>Médias</target>
             </trans-unit>
+            <trans-unit id="Livre">
+                <source>Livre</source>
+                <target>Livre</target>
+            </trans-unit>
+            <trans-unit id="Contenu numérique">
+                <source>Contenu numérique</source>
+                <target>Contenu numérique</target>
+            </trans-unit>
+            <trans-unit id="Détails">
+                <source>Détails</source>
+                <target>Détails</target>
+            </trans-unit>
+            <trans-unit id="Publié le">
+                <source>Publié le</source>
+                <target>Publié le</target>
+            </trans-unit>
+            <trans-unit id="Auteur">
+                <source>Auteur</source>
+                <target>Auteur</target>
+            </trans-unit>
+            <trans-unit id="Book List">
+                <source>Book List</source>
+                <target>Liste des livres</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
