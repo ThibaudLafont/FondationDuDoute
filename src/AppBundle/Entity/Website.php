@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Website
@@ -33,6 +34,8 @@ class Website
      * @var string
      *
      * @ORM\Column(name="artist_name", type="string")
+     * @Assert\NotNull(message="Veuillez renseigner le nom de l'artiste")
+     * @Assert\NotBlank(message="Veuillez renseigner le nom de l'artiste")
      */
     private $artistName;
 
@@ -40,6 +43,9 @@ class Website
      * @var string
      *
      * @ORM\Column(name="website_url", type="string")
+     * @Assert\NotNull(message="Veuillez renseigner l'url")
+     * @Assert\NotBlank(message="Veuillez renseigner l'url")
+     * @Assert\Url(message="Veuillez renseigner une URL valide")
      */
     private $websiteUrl;
 
@@ -97,6 +103,15 @@ class Website
     public function setWebsiteUrl($websiteUrl)
     {
         $this->websiteUrl = $websiteUrl;
+    }
+
+    /**
+     * @return bool
+     * @Assert\IsTrue(message="Veuillez renseigner une image de couverture")
+     */
+    public function hasACoverImage()
+    {
+        return $this->getCoverImage()->getMedia() !== null;
     }
 
 }
