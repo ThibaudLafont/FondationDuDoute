@@ -23,11 +23,11 @@ class PostAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Contenu', ['class' => 'col-md-8'])
-                ->add('coverImage', AdminType::class, [
-                    'label' => 'Image de couverture'
-                ])
                 ->add('title', TextType::class, [
                     'label' => 'Titre'
+                ])
+                ->add('coverImage', AdminType::class, [
+                    'label' => 'Image de couverture'
                 ])
                 ->add('summary', TextareaType::class, [
                     'label' => 'Résumé'

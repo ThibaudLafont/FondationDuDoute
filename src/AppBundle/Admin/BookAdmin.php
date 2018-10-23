@@ -17,16 +17,13 @@ class BookAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Livre', ['class' => 'col-md-9'])
-                ->add('coverImage', AdminType::class, [
-                    'label' => 'Image de couverture'
-                ])
+            ->with('Livre', ['class' => 'col-md-8'])
                 ->add('title', TextType::class, [
                     'label' => 'Titre'
                 ])
                 ->add('bookHasMedias', CollectionType::class, [
                     'by_reference' => false,
-                    'label' => 'Gallerie'
+                    'label' => 'Contenu numérique'
                 ], [
                     'edit' => 'inline',
                     'inline' => 'table',
@@ -34,7 +31,10 @@ class BookAdmin extends AbstractAdmin
                     'admin_code' => 'custom.media.admin.book_has_media'
                 ])
             ->end()
-            ->with('Détails', ['class' => 'col-md-3'])
+            ->with('Détails', ['class' => 'col-md-4'])
+            ->add('coverImage', AdminType::class, [
+                'label' => 'Image de couverture'
+            ])
                 ->add('publishAt', DateType::class, [
                     'format' => 'ddMMyyyy',
                     'label' => 'Publié le'

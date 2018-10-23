@@ -14,15 +14,19 @@ class WebsiteAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('coverImage', AdminType::class, [
-                'label' => 'Image de couverture'
-            ])
-            ->add('artistName', TextType::class, [
-                'label' => 'Nom de l\'artiste'
-            ])
-            ->add('websiteUrl', UrlType::class, [
-                'label' => "URL du site"
-            ]);
+            ->with('Livre', ['class' => 'col-md-8'])
+                ->add('artistName', TextType::class, [
+                    'label' => 'Nom de l\'artiste'
+                ])
+                ->add('websiteUrl', UrlType::class, [
+                    'label' => "URL du site"
+                ])
+            ->end()
+            ->with('Détail', ['class' => 'col-md-4'])
+                ->add('coverImage', AdminType::class, [
+                    'label' => 'Image de couverture'
+                ])
+            ->end();
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
