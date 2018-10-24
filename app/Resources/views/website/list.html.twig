@@ -4,24 +4,26 @@
     Sites des artistes
 {% endblock %}
 {% block sub_main_title %}
-    15 artistes
+    {{ websiteNbre }}
 {% endblock %}
 
 {% block body %}
     <div class="ui container">
         <div class="ui center aligned four column grid">
             <!-- Content -->
-            {% for i in 1..15 %}
+            {% for website in websites %}
                 <div class="column">
-                    <a class="ui blue card" title="Consulter" website-url="https://www.fondationdudoute.fr/" author-name="Nom de l'artiste">
+                    <a class="ui blue card"
+                       title="Consulter"
+                       website-url="{{ website.websiteUrl }}"
+                       author-name="{{ website.artistName }}"
+                       style="height: 175px; background: url({% path website.coverImage.media, 'reference' %}); background-size:cover"
+                    >
                         <div class="ui fluid image">
                             <!-- Blue Ribbon -->
                             <div class="ui blue ribbon label">
-                                <i class="user icon"></i> Nom de l'artiste
+                                <i class="user icon"></i> {{ website.artistName }}
                             </div>
-
-                            <!-- Main Picture -->
-                            <img src="/uploads/media/maquetteUT.jpg">
                         </div>
                     </a>
                 </div>
