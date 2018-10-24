@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="/css/player.css">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
@@ -44,9 +45,9 @@
                         {% if phMedia.isVideoMedia %}
                             <a data-fancybox="gallery" href="{{ phMedia.urlIfVideoMedia }}">
                         {% else %}
-                            <a data-fancybox="gallery" href="{% path phMedia.media, 'small' %}">
+                            <a data-fancybox="gallery" href="{% path phMedia.media, 'reference' %}">
                         {% endif %}
-                            <img class="ui image" src="{% path phMedia.media, 'small' %}" alt="">
+                            <img class="ui image gallery-img" src="{% path phMedia.media, 'square' %}" alt="">
                         </a>
                     {% endfor %}
                 </div>
@@ -69,8 +70,7 @@
             arrows: true,
             prevArrow: $('#prevArrow'),
             nextArrow: $('#nextArrow'),
-            slidesToShow: 6,
-            slidesToScroll: 6
+            variableWidth: true
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>

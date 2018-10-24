@@ -14,6 +14,7 @@ sonata_media:
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+                square: { height: 150, quality: 70}
         visual:
             providers:
                 - sonata.media.provider.custom.image
@@ -23,18 +24,21 @@ sonata_media:
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+                square: { height: 150, quality: 70}
         audio:
             providers:
                 - sonata.media.provider.audio
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+                square: { height: 150, quality: 70}
         image:
             providers:
                 - sonata.media.provider.custom.image
             formats:
                 small: { width: 100 , quality: 70}
                 big:   { width: 500 , quality: 70}
+                square: { height: 150, quality: 70}
     cdn:
         server:
             path: /uploads/media

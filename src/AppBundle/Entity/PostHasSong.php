@@ -52,4 +52,15 @@ class PostHasSong extends BaseHasMedia
         $this->post = $post;
     }
 
+    public function getSongsForHowler()
+    {
+        $media = $this->getMedia();
+
+        $return = [
+            'title' => $media->getTitle(),
+            'file'  => 'test',
+            'howler' => null
+        ];
+    }
+
 }
