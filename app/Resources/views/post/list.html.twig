@@ -4,39 +4,31 @@
     Fiches thématiques
 {% endblock %}
 {% block sub_main_title %}
-    6 fiches
+    {{ postNbre }}
 {% endblock %}
 
 {% block body %}
 <!-- Posts -->
-<div class="ui posts cards grid container">
-    {% for i in 1..6 %}
+<div class="ui posts container ui center aligned four column grid">
+    {% for post in posts %}
         <!-- Post Item -->
-        <section class="four wide column">
+        <section class="column">
             <!-- Card -->
             <div class="ui pink card">
 
                 <!-- Image Block -->
-                <div class="ui dimmable fluid image">
-                    <!-- Dimmer link -->
-                    <div class="ui dimmer">
-                        <div class="content">
-                            <div class="center">
-                                <a href="/posts/show" class="ui primary button">Consulter</a>
-                            </div>
-                        </div>
+                <a href="{{ post.showUrl }}">
+                    <div class="ui dimmable fluid image"
+                         style="height: 175px; background: url({% path post.coverImage.media, 'reference' %}); background-size:cover">
                     </div>
-
-                    <!-- Item image -->
-                    <img src="/uploads/media/maquetteUT.jpg">
-                </div>
+                </a>
 
                 <!-- Content block -->
                 <div class="content">
                     <!-- Top row infos -->
-                    <a href="/posts/show" class="left aligned header">Titre du post</a>
+                    <a href="{{ post.showUrl }}" class="left aligned header">{{ post.title }}</a>
                     <div class="left aligned description">
-                        Résumé court du post en quelques mots
+                        {{ post.summary }}
                     </div>
                 </div>
 
@@ -48,7 +40,7 @@
                             <div class="item">
                                 <div class="content">
                                     <i class="ui camera retro icon"></i>
-                                    6
+                                    {{ post.imgNbre }}
                                 </div>
                             </div>
 
@@ -56,7 +48,7 @@
                             <div class="item">
                                 <div class="content">
                                     <i class="ui film icon"></i>
-                                    12
+                                    {{ post.videoNbre }}
                                 </div>
                             </div>
 
@@ -64,7 +56,7 @@
                             <div class="item">
                                 <div class="content">
                                     <i class="ui music icon"></i>
-                                    2
+                                    {{ post.songNbre }}
                                 </div>
                             </div>
                         </div>

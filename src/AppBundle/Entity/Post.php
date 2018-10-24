@@ -257,4 +257,42 @@ class Post
     {
         return $this->getCoverImage()->getMedia() !== null;
     }
+
+    public function getSongNbre()
+    {
+        return $this->getPostHasSongs()->count();
+    }
+
+    public function getShowUrl()
+    {
+        return '/post/' . $this->getId();
+    }
+
+    public function getImgNbre()
+    {
+        $imgNbre = 0;
+        foreach($this->getPostHasMedias() as $phM) {
+            $providerName = $phM->getMedia()->getProviderName();
+            if($providerName === 'sonata.media.provider.custom.image') {
+                $imgNbre ++;
+            }
+        }
+        return $imgNbre;
+    }
+
+    public function getVideoNbre()
+    {
+        $videoNbre = 0;
+        foreach($this->getPostHasMedias() as $phM) {
+            $providerName = $phM->getMedia()->getProviderName();
+            if(
+                $providerName === 'sonata.media.provider.custom.youtube' ||
+                $providerName === 'sonata.media.provider.custom.vimeo' ||
+                $providerName === 'sonata.media.provider.custom.dailymotion'
+            ) {
+                $videoNbre ++;
+            }
+        }
+        return $videoNbre;
+    }
 }
