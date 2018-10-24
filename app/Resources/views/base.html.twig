@@ -1,13 +1,79 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!DOCTYPE html><html>
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/front-bundles/semantic/dist/semantic.min.css">
+    <style>
+        #flipbook{
+            height: 450px;
+            width: 600px;
+        }
+        #flipbook .turn-page{
+            background-color:#ccc;
+            background-size:100% 100%;
+        }
+    </style>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="pushable">
+    <!-- Sidebar -->
+    {% include 'elements/_sidebar.html.twig' %}
+
+    <!-- Site content [for sidebar] !-->
+    <div class="pusher">
+        <!-- Fixed menu -->
+        {% include 'elements/_fixed_menu.html.twig' %}
+
+        <div class="ui main-content vertical center aligned segment">
+            <div class="container dimmable">
+                <!-- Main header Block -->
+                {#{% include 'elements/_main_header.html.twig' %}#}
+                <div class="ui masthead container">
+                    <h1 class="ui right aligned header">
+                        <div class="content">
+                            {% block main_title %}s title{% endblock %}
+                            <div class="sub header">{% block sub_main_title %}Sub-header{% endblock %}</div>
+                        </div>
+                    </h1>
+                </div>
+
+                <!-- Body Block -->
+                {% block body %}{% endblock %}
+
+                <!-- Footer -->
+                {% include 'elements/_footer.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    <!-- JQuery -->
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+
+    <!-- Semantic-UI -->
+    <script src="/front-bundles/semantic/dist/semantic.min.js"></script>
+
+    <script>
+        /* Sticky Menu */
+        //        $('ui.sticky.launch-menu').sticky({
+        //            pushing: true
+        //        });
+
+        /* Sidebar */
+        $('.item.toggle-sidebar').click(function(){
+            $('body .ui.sidebar')
+                .sidebar('setting', 'transition', 'overlay')
+                .sidebar('toggle')
+            ;
+        });
+    </script>
+
+    <!-- Specific JS Block -->
+    {% block javascripts %}{% endblock %}
+</body>
 </html>

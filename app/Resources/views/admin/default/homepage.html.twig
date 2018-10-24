@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .pusher,
+        body > div > div.ui.main-content.vertical.center.aligned.segment,
+        body > div > div.ui.main-content.vertical.center.aligned.segment > div
+        {
+            height: 100%;
+        }
+        body > div > div.ui.main-content.vertical.center.aligned.segment > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+{% endblock %}
+
+{% block main_title %}
+    Administration
+{% endblock %}
+{% block sub_main_title %}
+    Accueil
+{% endblock %}
+
+{% block body %}
+    <div class="ui container">
+        <div class="ui centered link cards">
+            {#<div class="column">#}
+                <div class="ui card" link-to="/admin/artists">
+                    <div class="image">
+                        <i class="ui horizontal-marged huge external resource icon"></i>
+                    </div>
+                    <div class="left aligned content">
+                        <div class="header">Sites des artistes Fluxus</div>
+                        <div class="meta">
+                            <a>59 sites webs</a>
+                        </div>
+                    </div>
+                </div>
+            {#</div>#}
+            {#<div class="column">#}
+                <div class="ui card" link-to="/admin/posts">
+                    <div class="image">
+                        <i class="ui horizontal-marged huge block layout icon"></i>
+                    </div>
+                    <div class="left aligned content">
+                        <div class="header">Fiches thématiques</div>
+                        <div class="meta">
+                            <a>14 fiches</a>
+                        </div>
+                    </div>
+                </div>
+            {#</div>#}
+            {#<div class="column">#}
+                <div class="ui card" link-to="/admin/books">
+                    <div class="image">
+                        <i class="ui horizontal-marged huge book icon"></i>
+                    </div>
+                    <div class="left aligned content">
+                        <div class="header">Consultation numérique</div>
+                        <div class="meta">
+                            <a>26 livres</a>
+                        </div>
+                    </div>
+                </div>
+            {#</div>#}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('.ui.card').each(function(){
+            $(this).click(function(){
+                window.location = $(this).attr('link-to');
+            });
+        })
+    </script>
+{% endblock %}

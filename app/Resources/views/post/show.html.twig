@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="/css/player.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+{% endblock %}
+
+{% block main_title %}
+    Titre du post
+{% endblock %}
+{% block sub_main_title %}
+    03/05/2018
+{% endblock %}
+
+{% block body %}
+    <section class="ui container">
+        <div class="ui grid">
+            <div class="ui twelve wide column">
+                <article class="ui left aligned clearing segment">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+                    <h2>Titre de niveau 1</h2>
+                    <img src="/uploads/media/maquetteUT.jpg" alt="" class="ui floated left small image">
+                    <p>Consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <h3>Titre de niveau 2</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <h3>Titre de niveau 2</h3>
+                    <img src="/uploads/media/maquetteUT.jpg" alt="" class="ui floated right small image">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </article>
+            </div>
+            <div class="ui four wide column">
+                <div id="player" class="ui segment">
+                    <div class="content">
+                        {% include 'elements/_player.html.twig' %}
+                    </div>
+                </div>
+                <div id="list" class="ui fluid vertical menu">
+                </div>
+            </div>  
+        </div>
+        <div class="ui segments">
+            <div class="ui segment">
+                <h2 class="ui left aligned header">
+                    Gallerie
+                </h2>
+            </div>
+            <div class="ui segment">
+                <div id="gallery-items">
+                    {% for i in 1..10 %}
+                        <a data-fancybox="gallery" href="/uploads/media/maquetteUT.jpg">
+                            <img class="ui image" src="/uploads/media/maquetteUT.jpg" alt="">
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="ui center aligned segment">
+                <div id="prevArrow" class="ui button"><i class="ui left arrow icon"></i></div>
+                <div id="nextArrow" class="ui button"><i class="ui right arrow icon"></i></div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/vendor/node_modules/howler/dist/howler.js"></script>
+    <script src="/js/player.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $('#gallery-items').slick({
+            infinite: true,
+            arrows: true,
+            prevArrow: $('#prevArrow'),
+            nextArrow: $('#nextArrow'),
+            slidesToShow: 6,
+            slidesToScroll: 6
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+
+
+{% endblock %}

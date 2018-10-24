@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block main_title %}
+    Sites des artistes
+{% endblock %}
+{% block sub_main_title %}
+    15 artistes
+{% endblock %}
+
+{% block body %}
+    <div class="ui container">
+        <div class="ui center aligned four column grid">
+            <!-- Content -->
+            {% for i in 1..15 %}
+                <div class="column">
+                    <a class="ui blue card" title="Consulter" website-url="https://www.fondationdudoute.fr/" author-name="Nom de l'artiste">
+                        <div class="ui fluid image">
+                            <!-- Blue Ribbon -->
+                            <div class="ui blue ribbon label">
+                                <i class="user icon"></i> Nom de l'artiste
+                            </div>
+
+                            <!-- Main Picture -->
+                            <img src="/uploads/media/maquetteUT.jpg">
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="ui page dimmer">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Card click event
+        $('a.ui.blue.card').click(function(){
+            // Reset old dimmer
+            $('.page.dimmer').empty();
+
+            // Close icon
+            var icon = document.createElement('i');
+            icon.classList = ('ui red close icon');
+            icon.style.float = "right";
+            icon.style.cursor = 'pointer';
+            // Click event for button
+            $(icon).click(function(){
+                $('.page.dimmer').dimmer('hide')
+            });
+
+            // Header
+            var header = document.createElement('h2');
+            header.textContent = 'Site de ' + $(this).attr('author-name'); // Set text content
+            header.classList = ("header");                                // Set class
+            header.appendChild(icon);
+
+            // Embed div
+            var embed = document.createElement("embed");
+            embed.src = $(this).attr('website-url');      // Set src
+            embed.style.width = '100%';                   // Styles
+            embed.style.height = '95%';
+            embed.style.border = '1px solid white'
+
+            // Create Content
+            var content = document.createElement('div');
+            content.classList.add('content'); // Class
+            content.style.width = '90%';      // Styles
+            content.style.height = '90%';
+
+            // Append Child (concat)
+            content.appendChild(header);
+            content.appendChild(embed);
+
+            // Set new Dimmer
+            $('.page.dimmer')
+                .dimmer('add content', content)
+                .dimmer('toggle');
+        });
+    </script>
+{% endblock %}
