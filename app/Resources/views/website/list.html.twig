@@ -63,16 +63,26 @@
             embed.style.width = '100%';                   // Styles
             embed.style.height = '95%';
             embed.style.border = '1px solid white'
+            embed.style.visibility = 'hidden';
 
             // Create Content
             var content = document.createElement('div');
             content.classList.add('content'); // Class
-            content.style.width = '90%';      // Styles
+            content.style.width = '95%';      // Styles
             content.style.height = '90%';
 
+            // Create loader
+            var loader = document.createElement('div');
+            loader.classList = "ui indeterminate loader";
+
             // Append Child (concat)
-            content.appendChild(header);
+            content.appendChild(loader);               // Append Loader
+            content.appendChild(header);               // Append Header
             content.appendChild(embed);
+            embed.addEventListener('load', function()  // Append embed when it is loaded
+            {
+                embed.style.visibility = 'visible';
+            });
 
             // Set new Dimmer
             $('.page.dimmer')
