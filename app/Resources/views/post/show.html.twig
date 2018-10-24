@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block main_title %}
-    Titre du post
+    {{ post.title }}
 {% endblock %}
 {% block sub_main_title %}
     03/05/2018
@@ -18,35 +18,7 @@
         <div class="ui grid">
             <div class="ui twelve wide column">
                 <article class="ui left aligned clearing segment">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-                    <h2>Titre de niveau 1</h2>
-                    <img src="/uploads/media/maquetteUT.jpg" alt="" class="ui floated left small image">
-                    <p>Consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <h3>Titre de niveau 2</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    <h3>Titre de niveau 2</h3>
-                    <img src="/uploads/media/maquetteUT.jpg" alt="" class="ui floated right small image">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    {{ post.rawContent|raw }}
                 </article>
             </div>
             <div class="ui four wide column">
@@ -67,9 +39,14 @@
             </div>
             <div class="ui segment">
                 <div id="gallery-items">
-                    {% for i in 1..10 %}
-                        <a data-fancybox="gallery" href="/uploads/media/maquetteUT.jpg">
-                            <img class="ui image" src="/uploads/media/maquetteUT.jpg" alt="">
+                    {% for phMedia in post.postHasMedias %}
+                        {# Define media url to link #}
+                        {% if phMedia.isVideoMedia %}
+                            <a data-fancybox="gallery" href="{{ phMedia.urlIfVideoMedia }}">
+                        {% else %}
+                            <a data-fancybox="gallery" href="{% path phMedia.media, 'small' %}">
+                        {% endif %}
+                            <img class="ui image" src="{% path phMedia.media, 'small' %}" alt="">
                         </a>
                     {% endfor %}
                 </div>
@@ -83,7 +60,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="/vendor/node_modules/howler/dist/howler.js"></script>
+    <script src="/front-bundles/node_modules/howler/dist/howler.js"></script>
     <script src="/js/player.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
@@ -97,6 +74,18 @@
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+    <script>
+        // Dailymotion support
+        $.fancybox.defaults.media.dailymotion = {
+            matcher : /dailymotion.com\/embed\/video\/(.*)\/?(.*)/,
+            params : {
+                additionalInfos : 0,
+                autoStart : 1
+            },
+            type : 'iframe',
+            url  : '//www.dailymotion.com/embed/video/$1'
+        };
+    </script>
 
 
 {% endblock %}

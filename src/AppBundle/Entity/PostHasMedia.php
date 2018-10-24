@@ -52,4 +52,31 @@ class PostHasMedia extends BaseHasMedia
         $this->post = $post;
     }
 
+    public function isVideoMedia()
+    {
+        if($this->getMedia()->getProviderName() === 'sonata.media.provider.custom.image')
+            return false;
+        return true;
+    }
+
+
+    public function getUrlIfVideoMedia()
+    {
+        // Store parts of URL
+        $media = $this->getMedia();
+        $providerUrl = $media->getMetadataValue('provider_url');
+        $urlAdd = '';
+        $reference =  $media->getProviderReference();
+
+        // Add url requirements if Dailymotion
+        if(preg_match('%dailymotion%', $providerUrl)){
+            $urlAdd = '/embed/video/';
+        }
+
+        // Concat & return
+        return $providerUrl
+            . $urlAdd
+            . $reference;
+    }
+
 }

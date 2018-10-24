@@ -27,4 +27,17 @@ class PostController extends Controller
             'postNbre' => $postNbre
         ]);
     }
+
+    /**
+     * @Route("/post/{id}", name="post_show")
+     */
+    public function showAction($id)
+    {
+        $post = $this->getDoctrine()->getRepository(Post::class)
+            ->find($id);
+
+        return $this->render('post/show.html.twig', [
+            'post' => $post
+        ]);
+    }
 }
