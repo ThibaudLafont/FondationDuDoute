@@ -1,0 +1,25 @@
+{% macro bookData(bookHasMedias) %}
+    <div class="ui transparent segment">
+        <h2 class="ui white header">
+            {{ bookHasMedias.0.book.title }}
+            <i style="float:right;cursor:pointer;" class="ui close red icon"></i>
+        </h2>
+    </div>
+    <div class="ui center aligned transparent segment">
+        <div id="flipbook" class="sheet">
+            <div class="hard"
+                 style="background:url({% path bookHasMedias.0.book.coverImage.media, 'reference' %}) no-repeat center; background-size: contain"
+            >
+            </div>
+            {% for bhMedia in bookHasMedias %}
+            <div class="hard"
+                 style="background:url({% path bhMedia.media, 'reference' %}) no-repeat center; background-size: contain">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="ui transparent segment">
+        <div id="left-button" class="ui inverted button"><-</div>
+        <div id="right-button" class="ui inverted button">-></div>
+    </div>
+{% endmacro bookData %}

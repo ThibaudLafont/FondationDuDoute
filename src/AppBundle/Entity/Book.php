@@ -222,4 +222,27 @@ class Book
         }
     }
 
+    public function getShowUrl()
+    {
+        return '/book/' . $this->getId();
+    }
+
+    public function getPublishedYear()
+    {
+        return $this->getPublishAt()->format('Y');
+    }
+
+    public function getBookData()
+    {
+        $bookData = '';
+        foreach($this->getBookHasMedias() as $bhMedia) {
+            return $bhMedia->getMedia();
+            $bookData .= sprintf(
+                "<div class=\"hard\" style=\"background-image:url('%s%');\"></div>",
+                $url
+            );
+        }
+        return $bookData;
+    }
+
 }

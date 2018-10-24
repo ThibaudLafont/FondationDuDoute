@@ -4,33 +4,33 @@
     Consultation numérique
 {% endblock %}
 {% block sub_main_title %}
-    15 livres
+    {{ bookNbre }}
 {% endblock %}
 
 {% block body %}
     <div class="ui container">
         <div class="ui center aligned four column grid">
             <!-- Content -->
-            {% for i in 1..15 %}
+            {% for book in books %}
                 <div class="column">
                     <div class="ui yellow card">
-                        <div class="ui fluid dimmable image">
+                        <div class="ui fluid dimmable image"
+                             style="height: 175px; background: url({% path book.coverImage.media, 'reference' %}); background-size:cover">
                             <div class="ui left aligned dimmer">
                                 <div class="center aligned content">
                                     <p>
-                                        Résumé en quelques mots du livre d'environ 220 charactères ce qui représente un peu plus
-                                        que ce texte.
+                                        {{ book.summary }}
                                     </p>
-                                    <a class="ui primary button">Consulter</a>
+                                    {% import 'book/_macro_book-data.html.twig' as b %}
+                                    <a class="ui primary button" book-data='{{ b.bookData(book.bookHasMedias) }}'>Consulter</a>
                                 </div>
                             </div>
-                            <img src="/uploads/media/maquetteUT.jpg">
                         </div>
                         <div class="left aligned content">
-                            <div class="header">Titre du livre</div>
+                            <div class="header">{{ book.title }}</div>
                             <div class="meta">
-                                <span class="right floated time">1986</span>
-                                <span class="category">Jean Autheur</span>
+                                <span class="right floated time">{{ book.publishedYear }}</span>
+                                <span class="category">{{ book.author }}</span>
                             </div>
                         </div>
                     </div>
@@ -60,29 +60,7 @@
             // Create element
             var content = document.createElement('div');
             content.classList = "ui center aligned transparent segments";
-            content.innerHTML = "<div class=\"ui transparent segment\">" +
-                "<h2 class='ui white header'>" +
-                "   Pique News Magazine 11/2011" +
-                "   <i style='float:right;cursor:pointer;' class='ui close red icon'></i>" +
-                "</h2>" +
-                "</div>" +
-                "<div class=\"ui center aligned transparent segment\">\n" +
-                "                <div id=\"flipbook\" class=\"sheet\">\n" +
-                "                    <div class=\"hard\" style=\"background-image:url('/img/01.jpg');\"></div>\n" +
-                "                    <div class=\"hard\" style=\"background-image:url('/img/02.jpg');\"></div>\n" +
-                "                    <div class=\"hard\" style=\"background-image:url('/img/03.jpg');\"></div>\n" +
-                "                    <div class=\"hard\" style=\"background-image:url('/img/04.jpg');\"></div>\n" +
-                "                    <div class=\"hard\" style=\"background-image:url('/img/05.jpg');\"></div>\n" +
-                "                    <div class=\"hard\" style=\"background-image:url('/img/06.jpg');\"></div>\n" +
-                "                    <div class=\"hard\"></div>\n" +
-                "                    <div class=\"hard\"></div>\n" +
-                "                </div>\n" +
-                "            </div>\n" +
-                "            <div class=\"ui transparent segment\">\n" +
-                "                <div id=\"left-button\" class=\"ui inverted button\"><-</div>\n" +
-                "                <div id=\"right-button\" class=\"ui inverted button\">-></div>\n" +
-                "            </div>\n" +
-                "        </div>";
+            content.innerHTML = this.getAttribute('book-data');
 
             // Set new Dimmer
             $('.page.dimmer')
