@@ -13,19 +13,24 @@
             <!-- Content -->
             {% for website in websites %}
                 <div class="column">
-                    <a class="ui blue card"
+                    <section class="ui blue card"
                        title="Consulter"
                        website-url="{{ website.websiteUrl }}"
-                       author-name="{{ website.artistName }}"
-                       style="height: 175px; background: url({% path website.coverImage.media, 'reference' %}); background-size:cover"
-                    >
-                        <div class="ui fluid image">
+                       author-name="{{ website.artistName }}">
+                        <div class="ui fluid image"
+                             style="height: 175px; background: url({% path website.coverImage.media, 'reference' %}); background-size:cover">
                             <!-- Blue Ribbon -->
                             <div class="ui blue ribbon label">
-                                <i class="user icon"></i> {{ website.artistName }}
+                                {{ website.websiteUrl }}
                             </div>
                         </div>
-                    </a>
+
+                        <!-- Content block -->
+                        <div class="content">
+                            <!-- Top row infos -->
+                            <a class="left aligned header"><i class="user icon"></i> {{ website.artistName }}</a>
+                        </div>
+                    </section>
                 </div>
             {% endfor %}
         </div>
@@ -36,8 +41,9 @@
 
 {% block javascripts %}
     <script>
+        $('section.ui.blue.card').css('cursor', 'pointer')
         // Card click event
-        $('a.ui.blue.card').click(function(){
+        $('section.ui.blue.card').click(function(){
             // Reset old dimmer
             $('.page.dimmer').empty();
 
