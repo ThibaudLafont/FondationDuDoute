@@ -27,7 +27,7 @@
         <!-- Fixed menu -->
         {% include 'elements/_fixed_menu.html.twig' %}
 
-        <div class="ui main-content vertical center aligned segment">
+        <div id="content-data" class="ui main-content vertical center aligned segment">
             <div class="container dimmable">
                 <!-- Main header Block -->
                 {#{% include 'elements/_main_header.html.twig' %}#}
@@ -59,17 +59,36 @@
     <script src="/front-bundles/semantic/dist/semantic.min.js"></script>
 
     <script>
-        /* Sticky Menu */
-        //        $('ui.sticky.launch-menu').sticky({
-        //            pushing: true
-        //        });
-
         /* Sidebar */
         $('.item.toggle-sidebar').click(function(){
             $('body .ui.sidebar')
                 .sidebar('setting', 'transition', 'overlay')
                 .sidebar('toggle')
             ;
+        });
+
+        // Send footer to bottom if needed
+        function sendFooterToBottomIfNeeded()
+        {
+            var windowHeight = $(window).outerHeight();
+            var contentHeight = $('#content-data').outerHeight();
+            if(contentHeight < windowHeight) {
+                $('footer')
+                    .css('position', 'fixed')
+                    .css('bottom', 0)
+                    .css('width', '100%')
+            }
+        }
+
+
+        $(function() {
+            // Lancer la fonction quand le DOM est ready
+            sendFooterToBottomIfNeeded();
+        });
+
+        $(window).resize(function() {
+            // Lancer la fonction quand la fenêtre est redimmensionnée
+            sendFooterToBottomIfNeeded();
         });
     </script>
 
