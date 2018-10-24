@@ -76,3 +76,7 @@
          Site Overrides
 *******************************/
 
+.sticky.fixed.left.launch-menu {
+  left: 1rem;
+  top: 3.5rem;
+}

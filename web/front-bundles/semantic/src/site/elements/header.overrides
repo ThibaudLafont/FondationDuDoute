@@ -1,3 +1,15 @@
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.masthead.container {
+    padding: 2.5rem 0rem;
+}
+.ui.masthead .content .sub.header {
+    border-top: @dividedBorder;
+    text-align: right;
+}
+
+.ui.white.header{
+    color: white
+}

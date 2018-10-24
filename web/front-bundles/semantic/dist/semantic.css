@@ -7652,6 +7652,19 @@ a.ui.inverted.grey.header:hover {
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.masthead.container {
+  padding: 2.5rem 0rem;
+}
+
+.ui.masthead .content .sub.header {
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  text-align: right;
+}
+
+.ui.white.header {
+  color: white;
+}
 /*!
  * # Semantic UI 2.4.2 - Icon
  * http://github.com/semantic-org/semantic-ui/
@@ -13804,6 +13817,10 @@ i.icon.youtube.square {
 /*******************************
          Site Overrides
 *******************************/
+
+.horizontal-marged {
+  margin: 3.5rem auto !important;
+}
 /*!
  * # Semantic UI 2.4.2 - Image
  * http://github.com/semantic-org/semantic-ui/
@@ -19310,6 +19327,20 @@ ol.ui.horizontal.list li:before,
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.main-content.segment {
+  padding-bottom: 0;
+}
+
+footer.ui.segments {
+  margin: 4.5rem 0 0 0;
+  border-radius: 0;
+}
+
+.ui.segment.transparent,
+.ui.segments.transparent {
+  background: transparent;
+}
 /*!
  * # Semantic UI 2.4.2 - Step
  * http://github.com/semantic-org/semantic-ui/
@@ -37135,7 +37166,7 @@ a.ui.nag {
   border-radius: 0em !important;
   margin: 0em !important;
   overflow-y: auto !important;
-  z-index: 102;
+  z-index: 1000;
 }
 
 /* GPU Layers for Child Elements */
@@ -37465,7 +37496,7 @@ body.pushable > .pusher {
 /* Set-up */
 
 .ui.overlay.sidebar {
-  z-index: 102;
+  z-index: 1000;
 }
 
 /* Initial */
@@ -37541,7 +37572,7 @@ body.pushable > .pusher {
   transition: -webkit-transform 500ms ease;
   transition: transform 500ms ease;
   transition: transform 500ms ease, -webkit-transform 500ms ease;
-  z-index: 102;
+  z-index: 1000;
 }
 
 /* Sidebar - Initial */
@@ -37703,7 +37734,7 @@ body.pushable > .pusher {
   transition: -webkit-transform 500ms ease;
   transition: transform 500ms ease;
   transition: transform 500ms ease, -webkit-transform 500ms ease;
-  z-index: 102;
+  z-index: 1000;
 }
 
 /* Sidebar - Initial  */
@@ -37860,6 +37891,11 @@ body.pushable > .pusher {
 /*******************************
          Site Overrides
 *******************************/
+
+.sticky.fixed.left.launch-menu {
+  left: 1rem;
+  top: 3.5rem;
+}
 /*!
  * # Semantic UI 2.4.2 - Tab
  * http://github.com/semantic-org/semantic-ui/

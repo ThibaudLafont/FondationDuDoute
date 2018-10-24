@@ -1,3 +1,16 @@
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.main-content.segment {
+    padding-bottom: 0;
+}
+footer.ui.segments{
+    margin: 4.5rem 0 0 0;
+    border-radius: 0;
+}
+
+.ui.segment.transparent,
+.ui.segments.transparent{
+    background: transparent;
+}

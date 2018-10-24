@@ -33,7 +33,7 @@
   border-radius: 0em !important;
   margin: 0em !important;
   overflow-y: auto !important;
-  z-index: 102;
+  z-index: 1000;
 }
 
 /* GPU Layers for Child Elements */
@@ -341,7 +341,7 @@ body.pushable > .pusher {
 
 /* Set-up */
 .ui.overlay.sidebar {
-  z-index: 102;
+  z-index: 1000;
 }
 
 /* Initial */
@@ -407,7 +407,7 @@ body.pushable > .pusher {
   transition: -webkit-transform 500ms ease;
   transition: transform 500ms ease;
   transition: transform 500ms ease, -webkit-transform 500ms ease;
-  z-index: 102;
+  z-index: 1000;
 }
 
 /* Sidebar - Initial */
@@ -551,7 +551,7 @@ body.pushable > .pusher {
   transition: -webkit-transform 500ms ease;
   transition: transform 500ms ease;
   transition: transform 500ms ease, -webkit-transform 500ms ease;
-  z-index: 102;
+  z-index: 1000;
 }
 
 /* Sidebar - Initial  */

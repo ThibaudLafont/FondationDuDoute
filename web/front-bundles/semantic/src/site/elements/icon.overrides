@@ -1,3 +1,7 @@
 /*******************************
          Site Overrides
 *******************************/
+
+.horizontal-marged {
+    margin: 3.5rem auto !important;
+}
