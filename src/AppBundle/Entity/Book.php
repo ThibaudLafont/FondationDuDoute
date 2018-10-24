@@ -35,7 +35,7 @@ class Book
     /**
      * @var Media
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CoverImage", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\CoverImage", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $coverImage;
 
