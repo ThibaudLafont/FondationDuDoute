@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
 */
 class Post
 {
@@ -61,6 +62,14 @@ class Post
      * @ORM\Column(name="raw_content", type="text")
      */
     private $rawContent;
+
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
     /**
      * @var ArrayCollection
      *
@@ -143,6 +152,22 @@ class Post
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return \Date
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \Date $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -250,6 +275,14 @@ class Post
     }
 
     /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        $this->setCreatedAt(new \DateTime());
+    }
+
+    /**
      * @return bool
      * @Assert\IsTrue(message="Veuillez renseigner une image de couverture")
      */
@@ -294,5 +327,10 @@ class Post
             }
         }
         return $videoNbre;
+    }
+
+    public function getCreationDate()
+    {
+        return $this->getCreatedAt()->format('d/m/Y');
     }
 }
