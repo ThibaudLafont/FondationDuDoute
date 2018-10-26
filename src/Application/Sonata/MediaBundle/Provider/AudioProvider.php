@@ -5,6 +5,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Provider\FileProvider;
+use Sonata\MediaBundle\Provider\MediaProviderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class AudioProvider extends FileProvider
@@ -23,7 +24,12 @@ class AudioProvider extends FileProvider
      */
     public function generatePublicUrl(MediaInterface $media, $format)
     {
-        return '/resources/audio-reference-image.jpg';
+        if (MediaProviderInterface::FORMAT_REFERENCE === $format) {
+            $path = $this->getReferenceImage($media);
+        } else {
+            $path = '/resources/audio-reference-image.jpg';
+        }
+        return $path;
     }
 
     /**

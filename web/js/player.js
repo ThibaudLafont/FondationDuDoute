@@ -20,23 +20,15 @@ elms.forEach(function(elm) {
  * @param {Array} playlist Array of objects with playlist song details ({title, file, howl}).
  */
 var Player = function(playlist) {
-    this.playlist = playlist;
-    this.index = 0;
+        this.playlist = playlist;
+        this.index = 0;
 
-    // Display the title of the first track.
-    track.innerHTML = '1. ' + playlist[0].title;
-
-    // Setup the playlist display.
-    playlist.forEach(function(song) {
-        var div = document.createElement('a');
-        div.className = 'ui left aligned item list-song';
-        div.innerHTML = song.title + "<i class='ui music icon'></i>";
-        div.onclick = function() {
-            player.skipTo(playlist.indexOf(song));
-        };
-        list.appendChild(div);
-    });
+        if(playlist.length > 0) {
+            // Display the title of the first track.
+            track.innerHTML = playlist[0].title;
+        }
 };
+
 Player.prototype = {
     /**
      * Play a song in the playlist.
@@ -98,7 +90,7 @@ Player.prototype = {
         sound.play();
 
         // Update the track display.
-        track.innerHTML = (index + 1) + '. ' + data.title;
+        track.innerHTML = data.title;
 
         // Show the pause button.
         if (sound.state() === 'loaded') {
@@ -266,128 +258,89 @@ Player.prototype = {
 };
 
 // Setup our new audio player class and pass it the playlist.
-var player = new Player([
-    {
-        title: 'Rave Digger',
-        file: '1',
-        howl: null
-    },
-    {
-        title: '80s Vibe',
-        file: '1',
-        howl: null
-    },
-    {
-        title: 'Running Out',
-        file: '1',
-        howl: null
-    },
-    {
-        title: 'New test',
-        file: '1',
-        howl: null
-    },
-    {
-        title: 'Test again',
-        file: '1',
-        howl: null
-    }
-]);
+function createPlayer(playlist){
+    // if(playlist.length > 0) {
+        var player = new Player(playlist);
 
-// Bind our player controls.
-playBtn.addEventListener('click', function() {
-    player.play();
-});
-pauseBtn.addEventListener('click', function() {
-    player.pause();
-});
-prevBtn.addEventListener('click', function() {
-    player.skip('prev');
-});
-nextBtn.addEventListener('click', function() {
-    player.skip('next');
-});
-// waveform.addEventListener('click', function(event) {
-//     player.seek(event.clientX / window.innerWidth);
-// });
-// playlistBtn.addEventListener('click', function() {
-//     player.togglePlaylist();
-// });
-playlist.addEventListener('click', function() {
-    player.togglePlaylist();
-});
-// volumeBtn.addEventListener('click', function() {
-//     player.toggleVolume();
-// });
-volume.addEventListener('click', function() {
-    player.toggleVolume();
-});
+        if(playlist.length > 0){
+            playlist.forEach(function(song) {
+                var div = document.createElement('a');
+                div.className = 'ui left aligned item list-song';
+                div.innerHTML = song.title + "<i class='ui music icon'></i>";
+                div.onclick = function() {
+                    player.skipTo(playlist.indexOf(song));
+                };
+                list.appendChild(div);
+            });
 
-// Setup the event listeners to enable dragging of volume slider.
-barEmpty.addEventListener('click', function(event) {
-    var per = event.layerX / parseFloat(barEmpty.scrollWidth);
-    player.volume(per);
-});
-sliderBtn.addEventListener('mousedown', function() {
-    window.sliderDown = true;
-});
-sliderBtn.addEventListener('touchstart', function() {
-    window.sliderDown = true;
-});
-volume.addEventListener('mouseup', function() {
-    window.sliderDown = false;
-});
-volume.addEventListener('touchend', function() {
-    window.sliderDown = false;
-});
+            // Bind our player controls.
+            playBtn.addEventListener('click', function() {
+                player.play();
+            });
+            pauseBtn.addEventListener('click', function() {
+                player.pause();
+            });
+            prevBtn.addEventListener('click', function() {
+                player.skip('prev');
+            });
+            nextBtn.addEventListener('click', function() {
+                player.skip('next');
+            });
+            volume.addEventListener('click', function() {
+                player.toggleVolume();
+            });
 
-var move = function(event) {
-    if (window.sliderDown) {
-        var x = event.clientX || event.touches[0].clientX;
-        var startX = window.innerWidth * 0.05;
-        var layerX = x - startX;
-        var per = Math.min(1, Math.max(0, layerX / parseFloat(barEmpty.scrollWidth)));
-        player.volume(per);
-    }
-};
+            // Setup the event listeners to enable dragging of volume slider.
+            barEmpty.addEventListener('click', function(event) {
+                var per = event.layerX / parseFloat(barEmpty.scrollWidth);
+                player.volume(per);
+            });
+            sliderBtn.addEventListener('mousedown', function() {
+                window.sliderDown = true;
+            });
+            sliderBtn.addEventListener('touchstart', function() {
+                window.sliderDown = true;
+            });
+            volume.addEventListener('mouseup', function() {
+                window.sliderDown = false;
+            });
+            volume.addEventListener('touchend', function() {
+                window.sliderDown = false;
+            });
 
-volume.addEventListener('mousemove', move);
-volume.addEventListener('touchmove', move);
+            var move = function(event) {
+                if (window.sliderDown) {
+                    var x = event.clientX || event.touches[0].clientX;
+                    var startX = window.innerWidth * 0.05;
+                    var layerX = x - startX;
+                    var per = Math.min(1, Math.max(0, layerX / parseFloat(barEmpty.scrollWidth)));
+                    player.volume(per);
+                }
+            };
 
-// Setup the "waveform" animation.
-// var wave = new SiriWave({
-//     container: waveform,
-//     width: window.innerWidth,
-//     height: window.innerHeight * 0.3,
-//     cover: true,
-//     speed: 0.03,
-//     amplitude: 0.7,
-//     frequency: 2
-// });
-// wave.start();
+            volume.addEventListener('mousemove', move);
+            volume.addEventListener('touchmove', move);
 
-// Update the height of the wave animation.
-// These are basically some hacks to get SiriWave.js to do what we want.
-var resize = function() {
-    var height = window.innerHeight * 0.3;
-    var width = window.innerWidth;
-    // wave.height = height;
-    // wave.height_2 = height / 2;
-    // wave.MAX = wave.height_2 - 4;
-    // wave.width = width;
-    // wave.width_2 = width / 2;
-    // wave.width_4 = width / 4;
-    // wave.canvas.height = height;
-    // wave.canvas.width = width;
-    // wave.container.style.margin = -(height / 2) + 'px auto';
+            // Update the height of the wave animation.
+            // These are basically some hacks to get SiriWave.js to do what we want.
+            var resize = function() {
+                var height = window.innerHeight * 0.3;
+                var width = window.innerWidth;
 
-    // Update the position of the slider.
-    var sound = player.playlist[player.index].howl;
-    if (sound) {
-        var vol = sound.volume();
-        // var barWidth = (vol * 0.9);
-        // sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
-    }
-};
-window.addEventListener('resize', resize);
-resize();
+                // Update the position of the slider.
+                var sound = player.playlist[player.index].howl;
+                if (sound) {
+                    var vol = sound.volume();
+                    // var barWidth = (vol * 0.9);
+                    // sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
+                }
+            };
+            window.addEventListener('resize', resize);
+            resize();
+        } else {
+            var div = document.createElement('a');
+            div.className = 'ui left aligned item list-song';
+            div.innerHTML = 'Aucun enregistrement' + "<i class='ui ban icon'></i>";
+            list.appendChild(div);
+        }
+}

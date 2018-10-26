@@ -63,6 +63,19 @@
 {% block javascripts %}
     <script src="/front-bundles/node_modules/howler/dist/howler.js"></script>
     <script src="/js/player.js"></script>
+    <script>
+        createPlayer([{% for phSong in post.postHasSongs %}
+            {% set media = phSong.media %}
+            {% if media is not null %}
+            {
+                title: "{{ media.name }}",
+                file: "/uploads/media/{% path media, 'reference' %}",
+                howl: null
+            },
+            {% endif %}
+            {% endfor %}]
+        )
+    </script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
         $('#gallery-items').slick({
@@ -86,6 +99,7 @@
             url  : '//www.dailymotion.com/embed/video/$1'
         };
     </script>
+    <script></script>
 
 
 {% endblock %}
