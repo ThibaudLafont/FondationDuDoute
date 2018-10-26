@@ -26,50 +26,57 @@
 {% block body %}
     <div class="ui container">
         <div class="ui centered link cards">
-                <div class="ui card" link-to="/websites">
-                    <div class="image">
-                        <i class="ui horizontal-marged huge external resource icon"></i>
+            <div class="ui card" link-to="/websites">
+                <div class="image">
+                    <i class="ui horizontal-marged huge external resource icon"></i>
+                </div>
+                <div class="left aligned content">
+                    <div class="header">Sites des artistes Fluxus</div>
+                    <div class="meta">
+                        <a>{{ websiteNbre }}</a>
                     </div>
-                    <div class="left aligned content">
-                        <div class="header">Sites des artistes Fluxus</div>
-                        <div class="meta">
-                            <a>{{ websiteNbre }}</a>
-                        </div>
-                        <div class="description">
-                            Visitez les sites web des artistes Fluxus
-                        </div>
+                    <div class="description">
+                        Visitez les sites web des artistes Fluxus
                     </div>
                 </div>
-                <div class="ui card" link-to="/posts">
-                    <div class="image">
-                        <i class="ui horizontal-marged huge block layout icon"></i>
+            </div>
+            <div class="ui card" link-to="/posts">
+                <div class="image">
+                    <i class="ui horizontal-marged huge block layout icon"></i>
+                </div>
+                <div class="left aligned content">
+                    <div class="header">Fiches thématique</div>
+                    <div class="meta">
+                        <a>{{ postNbre }}</a>
                     </div>
-                    <div class="left aligned content">
-                        <div class="header">Fiches thématique</div>
-                        <div class="meta">
-                            <a>{{ postNbre }}</a>
-                        </div>
-                        <div class="description">
-                            Articles sur des thématiques avec du contenu multimédia
-                        </div>
+                    <div class="description">
+                        Articles sur des thématiques avec du contenu multimédia
                     </div>
                 </div>
-                <div class="ui card" link-to="/books">
-                    <div class="image">
-                        <i class="ui horizontal-marged huge book icon"></i>
+            </div>
+            <div class="ui card" link-to="/books">
+                <div class="image">
+                    <i class="ui horizontal-marged huge book icon"></i>
+                </div>
+                <div class="left aligned content">
+                    <div class="header">Consultation numérique</div>
+                    <div class="meta">
+                        <a>{{ bookNbre }}</a>
                     </div>
-                    <div class="left aligned content">
-                        <div class="header">Consultation numérique</div>
-                        <div class="meta">
-                            <a>{{ bookNbre }}</a>
-                        </div>
-                        <div class="description">
-                            Découvrez les livres Fluxus, numérisés pour vous !
-                        </div>
+                    <div class="description">
+                        Découvrez les livres Fluxus, numérisés pour vous !
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="ui center basic segment">
+            <button class="ui massive label button">
+                <i class="external resource icon"></i>
+                Visiter le site web de la Fondation
+            </button>
         </div>
     </div>
+    <div class="ui page dimmer"></div>
 {% endblock %}
 
 {% block javascripts %}
@@ -79,5 +86,59 @@
                 window.location = $(this).attr('link-to');
             });
         })
+
+        $('.ui.massive.label.button').click(function(){
+            // Reset old dimmer
+            $('.page.dimmer').empty();
+
+            // Close icon
+            var icon = document.createElement('i');
+            icon.classList = ('ui red close icon');
+            icon.style.float = "right";
+            icon.style.cursor = 'pointer';
+            // Click event for button
+            $(icon).click(function(){
+                $('.page.dimmer').dimmer('hide')
+            });
+
+            // Header
+            var header = document.createElement('h2');
+            header.textContent = 'Site de la Fondation Du Doute'; // Set text content
+            header.classList = ("header");                                // Set class
+            header.appendChild(icon);
+
+            // Embed div
+            var embed = document.createElement("embed");
+            embed.src = 'https://www.fondationdudoute.fr/';      // Set src
+            embed.style.width = '100%';                   // Styles
+            embed.style.height = '95%';
+            embed.style.border = '1px solid white'
+            embed.style.visibility = 'hidden';
+
+            // Create Content
+            var content = document.createElement('div');
+            content.classList.add('content'); // Class
+            content.style.width = '95%';      // Styles
+            content.style.height = '90%';
+
+            // Create loader
+            var loader = document.createElement('div');
+            loader.classList = "ui indeterminate loader";
+
+            // Append Child (concat)
+            content.appendChild(loader);               // Append Loader
+            content.appendChild(header);               // Append Header
+            content.appendChild(embed);
+            embed.addEventListener('load', function()  // Append embed when it is loaded
+            {
+                embed.style.visibility = 'visible';
+                loader.style.display = 'none';
+            });
+
+            // Set new Dimmer
+            $('.page.dimmer')
+                .dimmer('add content', content)
+                .dimmer('toggle');
+        });
     </script>
 {% endblock %}
