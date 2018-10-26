@@ -3,3 +3,11 @@
     height: 11.72vw;
     margin: 5px;
 }
+
+article img[style*="float:left"] {
+    margin: 1rem 1rem 1rem 0;
+}
+
+article img[style*="float:right"] {
+    margin: 1rem 0 1rem 1rem;
+}
