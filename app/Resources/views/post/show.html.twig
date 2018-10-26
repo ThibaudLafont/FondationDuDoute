@@ -98,6 +98,14 @@
             type : 'iframe',
             url  : '//www.dailymotion.com/embed/video/$1'
         };
+
+        // Article image fancybox
+        $('article img').on('click', function() {
+            var image = this;
+            $.fancybox.open( {
+                src: this.src
+            });
+        });
     </script>
     <script></script>
 
