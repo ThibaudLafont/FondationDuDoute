@@ -1,6 +1,6 @@
 # Sonata Admin Bundle
 sonata_admin:
-    title: FDD - Administration
+    title: Fondation Du Doute
     search: false
     dashboard:
         groups:
