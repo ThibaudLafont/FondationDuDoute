@@ -11,3 +11,11 @@ article img[style*="float:left"] {
 article img[style*="float:right"] {
     margin: 1rem 0 1rem 1rem;
 }
+
+article img[style*="float: left"] {
+    margin: 1rem 1rem 1rem 0;
+}
+
+article img[style*="float: right"] {
+    margin: 1rem 0 1rem 1rem;
+}

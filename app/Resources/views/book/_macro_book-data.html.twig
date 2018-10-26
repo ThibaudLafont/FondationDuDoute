@@ -12,9 +12,11 @@
             >
             </div>
             {% for bhMedia in bookHasMedias %}
-            <div class="hard"
-                 style="background:url({% path bhMedia.media, 'reference' %}) no-repeat center; background-size: contain">
-            </div>
+                {% if bhMedia.media is not null %}
+                    <div class="hard"
+                         style="background:url({% path bhMedia.media, 'reference' %}) no-repeat center; background-size: contain">
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

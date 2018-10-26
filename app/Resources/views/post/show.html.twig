@@ -41,14 +41,16 @@
             <div class="ui segment">
                 <div id="gallery-items">
                     {% for phMedia in post.postHasMedias %}
-                        {# Define media url to link #}
-                        {% if phMedia.isVideoMedia %}
-                            <a data-fancybox="gallery" href="{{ phMedia.urlIfVideoMedia }}">
-                        {% else %}
-                            <a data-fancybox="gallery" href="{% path phMedia.media, 'reference' %}">
+                        {% if phMedia.media is not null %}
+                            {# Define media url to link #}
+                            {% if phMedia.isVideoMedia %}
+                                <a data-fancybox="gallery" href="{{ phMedia.urlIfVideoMedia }}">
+                            {% else %}
+                                <a data-fancybox="gallery" href="{% path phMedia.media, 'reference' %}">
+                            {% endif %}
+                                <img class="ui image gallery-img" src="{% path phMedia.media, 'big' %}" alt="">
+                            </a>
                         {% endif %}
-                            <img class="ui image gallery-img" src="{% path phMedia.media, 'square' %}" alt="">
-                        </a>
                     {% endfor %}
                 </div>
             </div>
@@ -100,6 +102,7 @@
         };
 
         // Article image fancybox
+        $('article img').css('cursor', 'pointer')
         $('article img').on('click', function() {
             var image = this;
             $.fancybox.open( {
