@@ -61,6 +61,10 @@ class Book
      * @ORM\Column(name="summary", type="text")
      * @Assert\NotNull(message="Veuillez renseigner un résumé")
      * @Assert\NotBlank(message="Veuillez renseigner un résumé")
+     * @Assert\Length(
+     *     max= 215,
+     *     maxMessage="Le résumé ne doit pas faire plus de 215 caractères"
+     * )
      */
     private $summary;
 
