@@ -37,7 +37,8 @@ class BookAdmin extends AbstractAdmin
             ])
                 ->add('publishAt', DateType::class, [
                     'format' => 'ddMMyyyy',
-                    'label' => 'Publié le'
+                    'label' => 'Publié le',
+                    'years' => range(1955, date('Y'))
                 ])
                 ->add('author', TextType::class, [
                     'label' => 'Auteur'
