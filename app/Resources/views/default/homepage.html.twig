@@ -71,7 +71,7 @@
         </div>
         <div class="ui center basic segment">
             <button class="ui massive label button">
-                <i class="external resource icon"></i>
+                <i class="globe icon"></i>
                 Visiter le site web de la Fondation
             </button>
         </div>
@@ -90,6 +90,7 @@
         $('.ui.massive.label.button').click(function(){
             // Reset old dimmer
             $('.page.dimmer').empty();
+            $('.page.dimmer').css('justify-content', 'flex-start')
 
             // Close icon
             var icon = document.createElement('i');
@@ -111,7 +112,7 @@
             var embed = document.createElement("embed");
             embed.src = 'https://www.fondationdudoute.fr/';      // Set src
             embed.style.width = '100%';                   // Styles
-            embed.style.height = '95%';
+            embed.style.height = '100%';
             embed.style.border = '1px solid white'
             embed.style.visibility = 'hidden';
 

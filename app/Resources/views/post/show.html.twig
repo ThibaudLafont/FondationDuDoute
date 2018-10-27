@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="/css/player.css">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
@@ -71,7 +70,7 @@
             {% if media is not null %}
             {
                 title: "{{ media.name }}",
-                file: "/uploads/media/{% path media, 'reference' %}",
+                file: "{% path media, 'reference' %}",
                 howl: null
             },
             {% endif %}

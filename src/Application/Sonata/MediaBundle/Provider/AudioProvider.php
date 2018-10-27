@@ -25,7 +25,7 @@ class AudioProvider extends FileProvider
     public function generatePublicUrl(MediaInterface $media, $format)
     {
         if (MediaProviderInterface::FORMAT_REFERENCE === $format) {
-            $path = $this->getReferenceImage($media);
+            $path = '/uploads/media/' . $this->getReferenceImage($media);
         } else {
             $path = '/resources/audio-reference-image.jpg';
         }
