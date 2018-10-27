@@ -14,7 +14,7 @@ class WebsiteAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Livre', ['class' => 'col-md-8'])
+            ->with('Site Web', ['class' => 'col-md-7'])
                 ->add('artistName', TextType::class, [
                     'label' => 'Nom de l\'artiste'
                 ])
@@ -22,7 +22,7 @@ class WebsiteAdmin extends AbstractAdmin
                     'label' => "URL du site"
                 ])
             ->end()
-            ->with('Détail', ['class' => 'col-md-4'])
+            ->with('Détail', ['class' => 'col-md-5'])
                 ->add('coverImage', AdminType::class, [
                     'label' => 'Image de couverture'
                 ])
