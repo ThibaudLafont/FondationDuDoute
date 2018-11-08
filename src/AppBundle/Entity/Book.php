@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package AppBundle\Entity
  *
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Book
 {
@@ -254,4 +255,28 @@ class Book
         return $bookData;
     }
 
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        $this->removeNullBookHasMedia();
+    }
+
+    /**
+     * @ORM\PreFlush()
+     */
+    public function preFlush()
+    {
+        $this->removeNullBookHasMedia();
+    }
+
+    public function removeNullBookHasMedia()
+    {
+        foreach ($this->getBookHasMedias() as $bhMedia) {
+            if($bhMedia->getMedia() === null) {
+                $this->getBookHasMedias()->removeElement($bhMedia);
+            }
+        }
+    }
 }

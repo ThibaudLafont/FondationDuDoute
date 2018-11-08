@@ -284,6 +284,33 @@ class Post
     public function prePersist()
     {
         $this->setCreatedAt(new \DateTime());
+        $this->removeNullPostHasMedia();
+        $this->removeNullPostHasSong();
+    }
+
+    /**
+     * @ORM\PreFlush()
+     */
+    public function preFlush()
+    {
+        $this->removeNullPostHasMedia();
+        $this->removeNullPostHasSong();
+    }
+
+    private function removeNullPostHasMedia() {
+        foreach ($this->getPostHasMedias() as $phMedia) {
+            if($phMedia->getMedia() === null){
+                $this->getPostHasMedias()->removeElement($phMedia);
+            }
+        }
+    }
+
+    private function removeNullPostHasSong(){
+        foreach($this->getPostHasSongs() as $phSong) {
+            if($phSong->getMedia() === null) {
+                $this->getPostHasSongs()->removeElement($phSong);
+            }
+        }
     }
 
     /**
