@@ -32,9 +32,9 @@ class BookAdmin extends AbstractAdmin
                 ])
             ->end()
             ->with('Détails', ['class' => 'col-md-5'])
-            ->add('coverImage', AdminType::class, [
-                'label' => 'Image de couverture'
-            ])
+                ->add('coverImage', AdminType::class, [
+                    'label' => 'Image de couverture'
+                ])
                 ->add('publishAt', DateType::class, [
                     'format' => 'ddMMyyyy',
                     'label' => 'Publié le',

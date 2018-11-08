@@ -216,7 +216,12 @@ class Book
     {
         // If has more than one media
         if($this->getBookHasMedias()->count() > 1) {
-            return true;
+            foreach($this->getBookHasMedias() as $bhMedia){
+                if($bhMedia->getMedia() !== null){
+                    return true;
+                }
+            }
+            return false;
         // If one item, check if media was inquired
         } elseif($this->getBookHasMedias()->count() === 1) {
             return $this->getBookHasMedias()->get(0)->getMedia() !== null;
