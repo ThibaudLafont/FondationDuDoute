@@ -279,4 +279,8 @@ class Book
             }
         }
     }
+
+    public function getPageNbre(){
+        return $this->getBookHasMedias()->count();
+    }
 }

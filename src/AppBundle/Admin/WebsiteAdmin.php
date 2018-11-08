@@ -37,8 +37,8 @@ class WebsiteAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('artistName')
-            ->add('websiteUrl');
+        $listMapper->addIdentifier('artistName', null, ['label' => 'Nom de l\'artiste'])
+            ->add('websiteUrl', null, ['label' => 'URL du site']);
     }
 
     public function toString($object)
