@@ -8,8 +8,8 @@ services:
             $cdn: '@sonata.media.cdn.server'
             $pathGenerator: '@sonata.media.generator.default'
             $thumbnail: '@sonata.media.thumbnail.format'
-            $allowedExtensions: ['jpg']
-            $allowedMimeTypes: ['image/jpeg']
+            $allowedExtensions: ['jpg', 'png']
+            $allowedMimeTypes: ['image/jpeg', 'image/png']
             $adapter: '@sonata.media.adapter.image.gd'
         tags:
             - { name: sonata.media.provider }
