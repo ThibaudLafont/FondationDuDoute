@@ -24,12 +24,13 @@ class BookAdmin extends AbstractAdmin
                 ])
                 ->add('bookHasMedias', CollectionType::class, [
                     'by_reference' => false,
+                    'mapped' => true,
                     'label' => 'Contenu numérique'
                 ], [
                     'edit' => 'inline',
                     'inline' => 'table',
                     'sortable' => 'position',
-                    'admin_code' => 'custom.media.admin.book_has_media'
+                    'admin_code' => 'custom.media.admin.book_has_media',
                 ])
             ->end()
             ->with('Détails', ['class' => 'col-md-5'])

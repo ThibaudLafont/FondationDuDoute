@@ -73,6 +73,7 @@ class Book
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="BookHasMedia", mappedBy="book", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Orm\OrderBy({"position" = "ASC"})
      */
     private $bookHasMedias;
 

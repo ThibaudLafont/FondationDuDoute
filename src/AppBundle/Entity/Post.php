@@ -78,6 +78,7 @@ class Post
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="PostHasSong", mappedBy="post", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Orm\OrderBy({"position" = "ASC"})
      */
     private $postHasSongs;
 
@@ -85,6 +86,7 @@ class Post
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="PostHasMedia", mappedBy="post", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @Orm\OrderBy({"position" = "ASC"})
      */
     private $postHasMedias;
 
