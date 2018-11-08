@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Book;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -61,7 +62,7 @@ class BookAdmin extends AbstractAdmin
 
     public function toString($object)
     {
-        return $object instanceof Post
+        return $object instanceof Book
             ? $object->getTitle()
             : 'Livre'; // shown in the breadcrumb on the create view
     }

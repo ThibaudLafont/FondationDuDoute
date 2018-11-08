@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Website;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -42,7 +43,7 @@ class WebsiteAdmin extends AbstractAdmin
 
     public function toString($object)
     {
-        return $object instanceof Post
+        return $object instanceof Website
             ? $object->getArtistName()
             : 'Site'; // shown in the breadcrumb on the create view
     }
