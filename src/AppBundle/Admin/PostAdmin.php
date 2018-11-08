@@ -63,10 +63,10 @@ class PostAdmin extends AbstractAdmin
                     'admin_code' => 'custom.media.admin.post_has_song'
                 ])
             ->end()
-            ->with('Gallerie', ['class' => 'col-md-8'])
+            ->with('Galerie', ['class' => 'col-md-8'])
                 ->add('postHasMedias', CollectionType::class, [
                     'by_reference' => false,
-                    'label' => 'Gallerie'
+                    'label' => 'Galerie'
                 ], [
                     'edit' => 'inline',
                     'inline' => 'table',
