@@ -298,17 +298,17 @@ class Post
     }
 
     private function removeNullPostHasMedia() {
-        foreach ($this->getPostHasMedias() as $phMedia) {
-            if($phMedia->getMedia() === null){
-                $this->getPostHasMedias()->removeElement($phMedia);
-            }
-        }
+        $this->removeNullHasMedia($this->getPostHasMedias());
     }
 
     private function removeNullPostHasSong(){
-        foreach($this->getPostHasSongs() as $phSong) {
-            if($phSong->getMedia() === null) {
-                $this->getPostHasSongs()->removeElement($phSong);
+        $this->removeNullHasMedia($this->getPostHasSongs());
+    }
+
+    private function removeNullHasMedia($collection) {
+        foreach($collection as $hMedia) {
+            if($hMedia->getMedia() === null) {
+                $collection->removeElement($hMedia);
             }
         }
     }
