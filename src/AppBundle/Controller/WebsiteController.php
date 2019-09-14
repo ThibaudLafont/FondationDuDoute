@@ -16,7 +16,7 @@ class WebsiteController extends Controller
     {
         // Get Books
         $websites = $this->getDoctrine()->getRepository(Website::class)
-            ->findAll();
+            ->findBy([], ['artistName' => 'ASC']);
 
         // Count Books
         $websiteNbre = count($websites);

@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         // Get Books
         $posts = $this->getDoctrine()->getRepository(Post::class)
-            ->findAll();
+            ->findBy([], ['title' => 'ASC']);
 
         // Count Books
         $postNbre = count($posts);

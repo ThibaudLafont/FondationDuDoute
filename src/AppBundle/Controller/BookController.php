@@ -16,7 +16,7 @@ class BookController extends Controller
     {
         // Get Books
         $books = $this->getDoctrine()->getRepository(Book::class)
-            ->findAll();
+            ->findBy([], ['title' => 'ASC']);
 
         // Count Books
         $bookNbre = count($books);

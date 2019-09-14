@@ -13,7 +13,7 @@
 
 {% block body %}
     <div class="ui container">
-        <div class="ui center aligned four column grid">
+        <div class="ui center aligned three column grid">
             <!-- Content -->
             {% for website in websites %}
                 <div class="column">
@@ -25,7 +25,7 @@
                              style="height: 175px; background: url({% path website.coverImage.media, 'reference' %}); background-size:cover">
                             <!-- Blue Ribbon -->
                             <div class="ui blue ribbon label">
-                                {{ website.websiteUrl }}
+                                {{ website.websiteUrl|slice(0,45) }}
                             </div>
                         </div>
 

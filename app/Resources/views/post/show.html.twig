@@ -20,25 +20,31 @@
 {% block body %}
     <section class="ui container">
         <div class="ui grid">
-            <div class="ui twelve wide column">
+            {% if post.postHasSongs is not empty %}
+                <div class="ui twelve wide column">
+            {% else %}
+                <div class="ui wide column">
+            {% endif %}
                 <article class="ui left aligned clearing segment">
                     {{ post.rawContent|raw }}
                 </article>
             </div>
-            <div class="ui four wide column">
-                <div id="player" class="ui segment">
-                    <div class="content">
-                        {% include 'elements/_player.html.twig' %}
+            {% if post.postHasSongs is not empty %}
+                <div class="ui four wide column">
+                    <div id="player" class="ui segment">
+                        <div class="content">
+                            {% include 'elements/_player.html.twig' %}
+                        </div>
                     </div>
-                </div>
-                <div id="list" class="ui fluid vertical menu">
-                </div>
-            </div>  
+                    <div id="list" class="ui fluid vertical menu">
+                    </div>
+                </div>  
+            {% endif %}
         </div>
         <div class="ui segments">
             <div class="ui segment">
                 <h2 class="ui left aligned header">
-                    Gallerie
+                    Galerie
                 </h2>
             </div>
             <div class="ui segment">
