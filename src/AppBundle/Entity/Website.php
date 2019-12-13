@@ -33,9 +33,7 @@ class Website
     /**
      * @var string
      *
-     * @ORM\Column(name="artist_first_name", type="string")
-     * @Assert\NotNull(message="Veuillez renseigner le prénom de l'artiste")
-     * @Assert\NotBlank(message="Veuillez renseigner le prénom de l'artiste")
+     * @ORM\Column(name="artist_first_name", type="string", nullable=true)
      */
     private $artistFirstName;
 

@@ -17,7 +17,8 @@ class WebsiteAdmin extends AbstractAdmin
         $formMapper
             ->with('Site Web', ['class' => 'col-md-7'])
                 ->add('artistFirstName', TextType::class, [
-                    'label' => 'Prénom de l\'artiste'
+                    'label' => 'Prénom de l\'artiste',
+                    'required' => false
                 ])
                 ->add('artistLastName', TextType::class, [
                     'label' => 'Nom de l\'artiste'
