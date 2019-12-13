@@ -16,7 +16,10 @@ class WebsiteAdmin extends AbstractAdmin
     {
         $formMapper
             ->with('Site Web', ['class' => 'col-md-7'])
-                ->add('artistName', TextType::class, [
+                ->add('artistFirstName', TextType::class, [
+                    'label' => 'Prénom de l\'artiste'
+                ])
+                ->add('artistLastName', TextType::class, [
                     'label' => 'Nom de l\'artiste'
                 ])
                 ->add('websiteUrl', UrlType::class, [
@@ -32,19 +35,21 @@ class WebsiteAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('artistName');
+        $datagridMapper->add('artistLastName');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('artistName', null, ['label' => 'Nom de l\'artiste'])
+        $listMapper
+            ->addIdentifier('artistFirstName', null, ['label' => 'Prénom'])
+            ->addIdentifier('artistLastName', null, ['label' => 'Nom'])
             ->add('websiteUrl', null, ['label' => 'URL du site']);
     }
 
     public function toString($object)
     {
         return $object instanceof Website
-            ? $object->getArtistName()
+            ? $object->getArtistLastName()
             : 'Site'; // shown in the breadcrumb on the create view
     }
 }

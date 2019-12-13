@@ -33,11 +33,21 @@ class Website
     /**
      * @var string
      *
-     * @ORM\Column(name="artist_name", type="string")
+     * @ORM\Column(name="artist_first_name", type="string")
+     * @Assert\NotNull(message="Veuillez renseigner le prénom de l'artiste")
+     * @Assert\NotBlank(message="Veuillez renseigner le prénom de l'artiste")
+     */
+    private $artistFirstName;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="artist_last_name", type="string")
      * @Assert\NotNull(message="Veuillez renseigner le nom de l'artiste")
      * @Assert\NotBlank(message="Veuillez renseigner le nom de l'artiste")
      */
-    private $artistName;
+    private $artistLastName;
 
     /**
      * @var string
@@ -48,6 +58,13 @@ class Website
      * @Assert\Url(message="Veuillez renseigner une URL valide")
      */
     private $websiteUrl;
+
+    /**
+     * Return firstName + lastName
+     */
+    public function getArtistName() {
+        return $this->getArtistFirstName() . ' ' . $this->getArtistLastName();
+    }
 
     /**
      * @return int
@@ -76,17 +93,33 @@ class Website
     /**
      * @return string
      */
-    public function getArtistName()
+    public function getArtistFirstName()
     {
-        return $this->artistName;
+        return $this->artistFirstName;
     }
 
     /**
-     * @param string $artistName
+     * @param string $artistFirstName
      */
-    public function setArtistName($artistName)
+    public function setArtistFirstName($artistFirstName)
     {
-        $this->artistName = $artistName;
+        $this->artistFirstName = $artistFirstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArtistLastName()
+    {
+        return $this->artistLastName;
+    }
+
+    /**
+     * @param string $artistLastName
+     */
+    public function setArtistLastName($artistLastName)
+    {
+        $this->artistLastName = $artistLastName;
     }
 
     /**
